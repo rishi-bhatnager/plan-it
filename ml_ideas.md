@@ -33,3 +33,4 @@ To do list is created each day, starting at time when app is opened and schedule
 Possible Points of Failure:
 
 1. The user could forget to remove items from the list. This would cause the app to schedule a ton of overdue shit for them to do. Should be smart enough to realize when user has a bunch of expired tasks and stop sending notifs for invalid time slots
+2. Task incompletion may not show that a certain time is bad, since the task could have been pushed forward.
