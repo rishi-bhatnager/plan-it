@@ -1,0 +1,14 @@
+We need people to look into how the following work. I say we put in a couple hours at the start to make sure we understand how this all works, and figure out if we'll need anything else.
+
+Google Calendar API: 
+	https://developers.google.com/calendar
+
+Linking a backend to the app:
+	https://android-developers.googleblog.com/2013/06/adding-backend-to-your-app-in-android.html
+	https://www.quora.com/I-want-to-develop-a-backend-for-an-Android-app-Which-technology-should-I-use
+After reading a bit, it sounds like Google App Engine might be the best option for us. They manage servers and it starts out free. We only start paying if people start using the platform.
+
+We could also buy servers which could get hype as fuck but it's harder to set up and requires 
+
+Tensorflow Lite (may or may not be needed depending on complexity of ML):
+	https://www.tensorflow.org/lite/guide
