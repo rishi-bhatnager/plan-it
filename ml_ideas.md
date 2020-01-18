@@ -33,4 +33,5 @@ To do list is created each day, starting at time when app is opened and schedule
 Possible Points of Failure:
 
 1. The user could forget to remove items from the list. This would cause the app to schedule a ton of overdue shit for them to do. Should be smart enough to realize when user has a bunch of expired tasks and stop sending notifs for invalid time slots
-2. Task incompletion may not show that a certain time is bad, since the task could have been pushed forward.
+
+2. In order to measure how well someone works in each hour, you would think we can just look at what they cross off at the end of the day and say the tasks that were not done had bad timing. This is not reasonable though, since a task may have been pushed forward due to bad timing before that task, only to be completed while another task was supposed to be. Thus we can only evaluate the fitness of a schedule as a whole unless they give us data during the day. How can we get data during the day? Well, if someone crosses something off their list after they finish it then we know how productive they were relative to the schedule and in what part of the day. This gives some means of editing their productivity vector.
