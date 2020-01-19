@@ -1,0 +1,3 @@
+Alright so one of the major logistical issues was that users need to set task times. If a mistake is made in predicting these times, which is inevitable, the rest of the schedule is no longer applicable. We then have to re-compile a schedule for their remaining time in the day, which seems to defeat the purpose of making a daily plan.
+
+One solution is to schedule by category instead of by task. We map out when they should be doing each of the categories, and during these times they see the to do list of that group of tasks in the order we recommend. We could have a settings option that lets the user decide if they want to put in the time they expect each task to take, and if so we could give them a specific goal of things to try complete for each work period.
