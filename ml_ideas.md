@@ -41,3 +41,9 @@ Possible Points of Failure:
 4. Cross off and re-adding a task. If someone accidentally removes a task from the list then the system will think they did it, even if they didn't. We could solve this by having a check condition that sees if the same task has just been put back up. If so, disregard this as a completion.
 
 5. The user could underestimate how long things will take. This makes the algorithm think they didn't finish things because they weren't working well when in reality they just got their estimation wrong. App should notify user if they are behind and give them the option to re-arrange their schedule. This should be triggered if user opens their list and doesn't make any changes even after they were supposed to have gotten things done.
+
+6. Tasks can be broken up into smaller pieces. How do we handle this?
+
+7. People can't predict how long things will take. 
+
+8. Working while eating.
