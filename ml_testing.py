@@ -1,7 +1,8 @@
 import numpy as np
+import pandas as pd
 from datetime import datetime
 
-class Task():
+class Task:
     def __init__(self, category, time, due, s = []):
         self.cat = category # one of [1, 2, 3]
         self.time = time # time user expects in half hours
@@ -10,11 +11,35 @@ class Task():
 
 
     def __str__(self):
-        return "Task {}, which takes {} half hours can be at: {}".format(self.due, self.time, self.slots)
+        return f"Task {self.due}, which takes {self.time} half hours can be at: {self.slots}"
 
-# User data on sleep:
 
-s = [-1, 7] # 11 pm to 7 am
+class User:
+    
+    class Sched:
+        def __init__(self, isEmpty, times = np.zeros(48)):
+            self.isEmpty = True
+            self.times = times
+            
+    class ProbMat:
+        def __init__(self, cats):
+            df = pd.DataFrame()
+            for cat in cats:
+                df[cat] = np.zeros(48)
+    
+    
+    def __init__(self, sleepStart, sleepEnd, cats):
+        # User data on sleep:
+        self.sleep = (sleepStart, sleepEnd) # (-1, 7) is 11 pm to 7 am
+        self.sched = Sched(True)
+        
+        if isinstance(cats, (tuple, list)):
+            self.cats = cats
+            self.probmat = ProbMat(cats)
+        else:
+            raise TypeError(f"Parameter cats is of invalid type {type(cats)}")
+        
+    
 
 # convert s into 48 half hour format:
 
@@ -103,24 +128,3 @@ for task in tasks:
                 li.append(i)
     task.slots = li
     print(task)
-            
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
