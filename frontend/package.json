@@ -1,0 +1,25 @@
+{
+  "name": "planner-app",
+  "description": "Planner AI.",
+  "version": "0.0.1",
+  "private": true,
+  "author": "The boys",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkalatchev7/PlannerApp.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node script.js",
+    "test": "mocha --exit test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.0",
+    "supertest": "^4.0.2"
+  }
+}
