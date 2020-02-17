@@ -1,16 +1,17 @@
 const LIST = document.querySelector(".list");
-const BUTTON = document.querySelector("button");
+const ADDBUTTON = document.querySelector(".add");
+const COMPBUTTON = document.querySelector(".compile");
 const INPUT = document.querySelector("input");
 
 // Adding a task to the list
 function addTask(e) {
     e.preventDefault();
-    LIST.innerHTML += `<li class="task"><a class="check" href="#"> ◦ </a><a class="entry" href="#"> ${INPUT.value} </a></li>`;
+    LIST.innerHTML += `<li class="task"><a class="check" href="#"> ✖ </a><a class="entry" href="#"> ${INPUT.value} </a></li>`;
     INPUT.value = "";
     // Add listener for the new task
-    let tasks = LIST.querySelectorAll(".check");
-    for (i = 0; i < tasks.length; i++) {
-        tasks[i].addEventListener('click', removeTask, false);
+    let checks = LIST.querySelectorAll(".check");
+    for (i = 0; i < checks.length; i++) {
+        checks[i].addEventListener('click', removeTask, false);
     }
 }
 
@@ -21,13 +22,28 @@ function removeTask(e) {
     this.parentElement.remove();
 }
 
+// Compile the Schedule
+function compileList() {
+    let tasks = document.querySelectorAll(".entry");
+    let tableSpaces = document.querySelectorAll("td");
+    for (let i = 0; i < (tableSpaces.length / 2); i++) {
+        let a = 2 * i + 1;
+        if (i < tasks.length) {
+            tableSpaces[a].innerHTML = tasks[i].innerHTML;
+        } else {
+            tableSpaces[a].innerHTML = "";
+        }
+    }
+}
+
 // Listen for enter pressed
 INPUT.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        BUTTON.click();
+        ADDBUTTON.click();
     }
 }, false);
 
-// Listen for button click
-BUTTON.addEventListener("click", addTask, false);
+// Listen for button clicks
+ADDBUTTON.addEventListener("click", addTask, false);
+COMPBUTTON.addEventListener("click", compileList, false);

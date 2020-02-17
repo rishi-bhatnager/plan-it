@@ -60,7 +60,7 @@ body {
     text-decoration: none;
 }
 
-.check a:hover {
+.check:hover {
     color: #a83256;
 }
 
@@ -80,10 +80,22 @@ input {
     border-radius: 3px;
 }
 
-.check {
-    font-size: 24px;
-}
-
 li {
     list-style-type: none;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #24272d;
 }
