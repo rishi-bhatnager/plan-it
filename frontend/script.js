@@ -18,7 +18,6 @@ function addTask(e) {
 // Remove task from list
 function removeTask(e) {
     e.preventDefault();
-    console.log(e.target);
     this.parentElement.remove();
 }
 
