@@ -5,19 +5,20 @@ const INPUT = document.querySelector("input");
 // Adding a task to the list
 function addTask(e) {
     e.preventDefault();
-    LIST.innerHTML += `<li class="task"><a href="#"> ${INPUT.value} </a></li>`;
+    LIST.innerHTML += `<li class="task"><a class="check" href="#"> ◦ </a><a class="entry" href="#"> ${INPUT.value} </a></li>`;
     INPUT.value = "";
     // Add listener for the new task
-    let tasks = LIST.querySelectorAll(".task");
-    console.log(tasks);
-    tasks[tasks.length - 1].addEventListener('click', removeTask, false);
+    let tasks = LIST.querySelectorAll(".check");
+    for (i = 0; i < tasks.length; i++) {
+        tasks[i].addEventListener('click', removeTask, false);
+    }
 }
 
 // Remove task from list
 function removeTask(e) {
     e.preventDefault();
     console.log(e.target);
-    this.remove();
+    this.parentElement.remove();
 }
 
 // Listen for enter pressed

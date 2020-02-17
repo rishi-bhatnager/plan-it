@@ -12,6 +12,7 @@ h1 {
 body {
     background-color: #24272d;
     color: #f0e9d8;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .title {
@@ -54,12 +55,35 @@ body {
     clear: both;
 }
 
-.task a {
+.task a{
     color: #f0e9d8;
     text-decoration: none;
 }
 
-.task a:hover {
+.check a:hover {
     color: #a83256;
-    text-decoration: line-through;
+}
+
+button {
+    background-color: #f0e9d8;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+input {
+    font-size: 16px;
+    border: none;
+    background-color: #f0e9d8;
+    border-radius: 3px;
+}
+
+.check {
+    font-size: 24px;
+}
+
+li {
+    list-style-type: none;
 }
