@@ -5,13 +5,17 @@ const INPUT = document.querySelector("input");
 
 // Adding a task to the list
 function addTask(e) {
-    e.preventDefault();
-    LIST.innerHTML += `<li class="task"><a class="check" href="#"> ✖ </a><a class="entry" href="#"> ${INPUT.value} </a></li>`;
-    INPUT.value = "";
-    // Add listener for the new task
-    let checks = LIST.querySelectorAll(".check");
-    for (i = 0; i < checks.length; i++) {
-        checks[i].addEventListener('click', removeTask, false);
+    if (INPUT.value.length !== 0) {
+        e.preventDefault();
+        LIST.innerHTML += `<li class="task"><a class="check" href="#"> ✖ </a><a class="entry" href="#"> ${INPUT.value} </a></li>`;
+        INPUT.value = "";
+        // Add listener for the new task
+        let checks = LIST.querySelectorAll(".check");
+        let items = LIST.querySelectorAll(".entry");
+        for (i = 0; i < checks.length; i++) {
+            checks[i].addEventListener('click', removeTask, false);
+            items[i].addEventListener('click', toggleExpansion, false);
+        }
     }
 }
 
@@ -34,6 +38,33 @@ function compileList() {
         }
     }
 }
+
+// Show task details
+function toggleExpansion(e) {
+    e.preventDefault();
+    if (this.children.length == 0) {
+        var open = false;
+    } else {
+        var open = true;
+    }
+    if (!open) {
+        open = true;
+        var para = document.createElement("p");
+        var node = document.createTextNode("Details...");
+        para.appendChild(node);
+        this.appendChild(para);
+    } else {
+        open = false;
+        this.querySelector("p").remove();
+    }
+}
+
+// Collapse task details
+function collapseTasks(e) {
+    e.preventDefault();
+
+}
+
 
 // Listen for enter pressed
 INPUT.addEventListener("keyup", function(event) {
