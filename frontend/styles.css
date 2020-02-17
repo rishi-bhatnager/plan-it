@@ -17,11 +17,18 @@ body {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-.title {
+.top {
     text-align: center;
     background-color: #1a1b1c;
     padding-top: 90px;
+}
+
+.subheading {
+    text-align: center;
+    background-color: #1a1b1c;
     border-bottom: 4px solid #f0e9d8;
+    font-style: italic;
+    color: #7a7a7a;
 }
 
 .info {
