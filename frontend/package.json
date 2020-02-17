@@ -12,8 +12,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "start": "node script.js",
-    "test": "mocha --exit test/*.test.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.16.3"
