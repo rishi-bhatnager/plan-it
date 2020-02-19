@@ -1,9 +1,5 @@
 html, body {margin:0;padding:0;height:100%;}
 
-.row {
-    height: 80%;
-}
-
 h1 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 40px;
@@ -16,32 +12,29 @@ h1 {
 }
 
 body {
-    background-color: #f7f7f7;
-    color: #11b8ba;
+    background-color: #24272d;
+    color: #f0e9d8;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .top {
     text-align: center;
-    background-color: #11b8ba;
-    color: #f7f7f7;
-    padding-top: 50px;
-    position: relative;
+    background-color: #1a1b1c;
+    padding-top: 90px;
 }
 
 .subheading {
     text-align: center;
-    background-color: #11b8ba;
-    border-bottom: 5px solid #f7f7f7;
+    background-color: #1a1b1c;
+    border-bottom: 4px solid #f0e9d8;
     font-style: italic;
-    color: #ebebeb;
-    margin-top: 30px;
+    color: #7a7a7a;
 }
 
 .info {
     column-count: 2;
     column-width: 100px;
-    color: #11b8ba;
+    color: #f0e9d8;
     padding: 20px;
 }
 
@@ -56,18 +49,16 @@ body {
     padding: 10px;
     padding-left: 3%;
     padding-right: 3%;
-    background-color: #ebebeb;
-    border-radius: 16px;
-    position: relative;
-    height:100%;
+    height: 600px;
+    background-color: #1a1b1c;
 }
 
 .column2 {
     float: left;
     width: 65%;
     padding: 10px;
-    height: 600px; /* Should be removed. Only for demonstration */
-    background-color:#f7f7f7;
+    height: 500px; /* Should be removed. Only for demonstration */
+    background-color:#24272d;
 }
 
 
@@ -78,54 +69,42 @@ body {
     clear: both;
 }
 
-.entry{
-    color: #a8a8a8;
-    text-decoration: none;
-}
-
-.check {
-    color: #a8a8a8;
+.task a{
+    color: #f0e9d8;
     text-decoration: none;
 }
 
 .list-container {
-    background-color: #f7f7f7;
+    background-color: #24272d;
     border-radius: 16px;
     padding: 5px;
     margin-bottom: 15px;
 }
 
 .check:hover {
-    color: #ff6557;
+    color: #a83256;
 }
 
 button {
-    background-color: #11b8ba;
+    background-color: #f0e9d8;
     border: none;
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 50px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 16px;
-    color: #f7f7f7;
-}
-
-button:hover {
-    background-color: #159799;
 }
 
 input {
     font-size: 16px;
     border: none;
-    background-color: #f7f7f7;
-    border-radius: 15px;
-    color: #707070;
+    background-color: #f0e9d8;
+    border-radius: 3px;
 }
 
 li {
     list-style-type: none;
     margin-left: -20px;
-    padding: 5px;
 }
 
 table {
@@ -133,8 +112,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     border-radius: 16px;
-    background-color: #ebebeb;
-    table-layout: auto;
+    background-color: #1a1b1c;
 }
 
 td, th {
@@ -143,46 +121,19 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #f7f7f7;
+    background-color: #24272d;
 }
 
 .schedule {
     width: 100%;
-    height: 80%;
+    height: 90%;
     overflow: scroll;
 }
 
 .details {
-    background-color: #ebebeb;
-    color: #11b8ba;
+    background-color: #1a1b1c;
+    color: #f0e9d8;
     border-radius: 10px;
     padding: 5px;
     margin-left: -20px;
-}
-
-.bottom {
-    position: fixed;
-    bottom: 0;
-    left: 30;
-    width: 300px;
-}
-
-.compile {
-    font-size: 24px;
-    border-radius: 24px;
-}
-
-::placeholder {
-    font-style: italic;
-    color: #a8a8a8;
-
-}
-
-.edit {
-    color: #11b8ba;
-    text-decoration: none;
-}
-
-.edit:hover {
-    color: #159799;
 }
