@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8,8 +9,8 @@
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
 
-    <link rel="stylesheet" href="styles.css?v=1.0">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script type="test/js" href="{% static 'js/script.js' %}" defer></script>
 
 </head>
 
@@ -32,7 +33,10 @@
             <input type="text" id="add-task" placeholder="Task Name"><br>
             <button type="button" class="add">+ Add Task</button>
             <div class="bottom">
-                <button type="button" class="compile">Compile Schedule</button>
+                <button type="button" class="compile" onclick="location.href=' {% url 'alert' %} '">Compile Schedule</button> <hr>
+                {% if alert %}
+                {{alert}}
+                {% endif %}
             </div>
         </div>
     <div class="column2">
