@@ -57,6 +57,7 @@ body {
     padding: 10px;
     padding-left: 3%;
     padding-right: 3%;
+    padding-bottom: 70px;
     background-color: #ebebeb;
     border-radius: 16px;
     flex: 1;
@@ -104,7 +105,6 @@ button {
     border: none;
     border-radius: 10px;
     margin-top: 10px;
-    margin-bottom: 50px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 16px;
     color: #f7f7f7;
@@ -157,13 +157,20 @@ tr:nth-child(even) {
     color: #11b8ba;
     border-radius: 10px;
     padding: 5px;
+    padding-left: 15px;
     margin-left: -20px;
+    align-content: center;
+}
+
+.details button {
+    border-radius: 15px;
+    border: 4px solid #ebebeb;
+    margin-top: -30px;
 }
 
 .bottom {
     position: absolute;
     right: 40px;
-    bottom: 0px;
 }
 
 .compile {
