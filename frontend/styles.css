@@ -9,6 +9,10 @@ h1 {
     left: 0;
     right: 0;
     z-index: 100;
+    color: #05c9ff;
+    border-style: ridge;
+    border-color: #05c9ff;
+    border-width:3px;
 }
 
 body {
@@ -74,14 +78,25 @@ body {
     color: #a83256;
 }
 
-button {
+button.add {
     background-color: #f0e9d8;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-top: 10px;
+    margin-right 1000px;
     margin-bottom: 50px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 16px;
+    box-shadow: 3px 3px #4797ff;
+
+}
+button.compile {
+    background-color: #f0e9d8;
+    border: none;
+    font-size: 16px;
+    border-radius: 15px;
+    margin-top: 10px;
+    outline
 }
 
 input {
@@ -92,7 +107,7 @@ input {
 }
 
 li {
-    list-style-type: none;
+    list-style-type: none
 }
 
 table {
