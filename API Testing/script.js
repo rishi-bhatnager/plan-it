@@ -49,7 +49,13 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-createEvent();
+
+    // Creates event object with parameters
+    schedule = createEvent('Test','my house', '15:00', '16:00');
+    //inserts given object
+    makeRequest(schedule);
+
+
     listUpcomingEvents();
   } else {
     authorizeButton.style.display = 'block';
@@ -88,25 +94,30 @@ function appendPre(message) {
  * the authorized user's calendar. If no events are found an
  * appropriate message is printed.
  */
+function createEvent(summary,location,startTime,endTime){
+
+  var sched = {
+  'summary': summary,
+  'location': location,
+  'description': 'A chance to hear more about Google\'s developer products.',
+  'start': {
+  'dateTime': ('2020-03-06T' + startTime + ':00-07:00'),
+
+  },
+  'end': {
+  'dateTime': ('2020-03-06T' + endTime + ':00-07:00'),
+  }
+  };
+  return sched;
 
 
-function createEvent(){
-var sched = {
-'summary': 'Google I/O 2015',
-'location': '800 Howard St., San Francisco, CA 94103',
-'description': 'A chance to hear more about Google\'s developer products.',
-'start': {
-'dateTime': '2020-05-28T09:00:00-07:00',
-'timeZone': 'America/Los_Angeles'
-},
-'end': {
-'dateTime': '2020-05-29T17:00:00-07:00',
-'timeZone': 'America/Los_Angeles'
+
+
+
+
 }
-};
 
 var makeRequest = function(resource) {
-
 var request = gapi.client.calendar.events.insert({
 'calendarId': 'primary',
 'resource': resource
@@ -116,9 +127,6 @@ appendPre('Event created: ' + resp.htmlLink);
 });
 };
 
-makeRequest(sched);
-
-}
 function listUpcomingEvents() {
   gapi.client.calendar.events.list({
     'calendarId': 'primary',
@@ -127,6 +135,7 @@ function listUpcomingEvents() {
     'singleEvents': true,
     'maxResults': 10,
     'orderBy': 'startTime'
+
   }).then(function(response) {
     var events = response.result.items;
     appendPre('Upcoming events:');
