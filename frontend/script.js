@@ -15,24 +15,24 @@ const CATDESCS = [
 function addTask(e) {
     if (INPUT.value.length !== 0) {
         e.preventDefault();
-        var task = document.createElement("li");
+        let task = document.createElement("li");
         task.setAttribute("class", "task");
 
-        var check = document.createElement("a");
+        let check = document.createElement("a");
         check.setAttribute("class", "check");
         check.setAttribute("href", "#");
-        var text1 = document.createTextNode(" ✖ ");
+        let text1 = document.createTextNode(" ✖ ");
         check.appendChild(text1);
 
-        var entry = document.createElement("a");
+        let entry = document.createElement("a");
         entry.setAttribute("class", "entry");
-        var text2 = document.createTextNode(` ${INPUT.value} `);
+        let text2 = document.createTextNode(` ${INPUT.value} `);
         entry.appendChild(text2);
 
-        var edit = document.createElement("a");
+        let edit = document.createElement("a");
         edit.setAttribute("class", "edit");
         edit.setAttribute("href", "#");
-        var text3 = document.createTextNode("Edit");
+        let text3 = document.createTextNode("Edit");
         edit.appendChild(text3);
 
         task.appendChild(check);
@@ -41,9 +41,8 @@ function addTask(e) {
 
         LIST.appendChild(task);
 
-        // LIST.innerHTML += `<li class="task"><a class="check" href="#"> ✖ </a>
-        //     <a class="entry" href="#"> ${INPUT.value} </a> | <a class="edit" href="#">Edit</a></li>`;
-        // INPUT.value = "";
+        INPUT.value = "";
+
         // Adds listener for the new task
         let checks = LIST.querySelectorAll(".check");
         let items = LIST.querySelectorAll(".edit");
@@ -103,22 +102,63 @@ function openDetails(e) {
     if (!open) {
         open = true;
         this.innerHTML = "";
-        var div = document.createElement("div");
-        var p = document.createElement("p");
-        var text = document.createTextNode("Select a Category:");
+        let div = document.createElement("div");
+        let p = document.createElement("p");
+        let text = document.createTextNode("Select a Category:");
         p.appendChild(text);
         div.appendChild(p);
         div.setAttribute("class", "details");
         for (let i = 0; i < CATEGORIES.length; i++) {
-            var button = document.createElement("button");
+            let button = document.createElement("button");
             button.setAttribute("class", "category");
-            var text = document.createTextNode(CATEGORIES[i]);
+            let text = document.createTextNode(CATEGORIES[i]);
             button.appendChild(text);
             div.appendChild(button);
             button.addEventListener('mouseover', showDesc, false)
             button.addEventListener('mouseout', hideDesc, false)
             button.addEventListener('click', selectCat, false)
         }
+        let p2 = document.createElement("p");
+        let text2 = document.createTextNode("How long do you expect this to take?");
+        p2.appendChild(text2);
+
+        let inputdiv = document.createElement("div");
+
+        let input = document.createElement("input");
+        input.setAttribute("style", "width: 120px;");
+        input.setAttribute("placeholder", "Enter time");
+
+        // Check for input submission
+        input.addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                if (isNaN(input.value - 1)) {
+                    console.log("u fool!");
+                }
+            }
+        }, false);
+
+        let hours = document.createTextNode(" Hours ");
+
+        let p3 = document.createElement("p");
+        let text3 = document.createTextNode("When does it need to be done by?")
+        p3.appendChild(text3);
+
+        let slider = document.createElement("input");
+        slider.setAttribute("type","range");
+        slider.setAttribute("min", "1");
+        slider.setAttribute("max", "100");
+        slider.setAttribute("value", "50");
+        slider.setAttribute("class", "slider");
+
+        // <input type="range" min="1" max="100" value="50" class="slider">
+
+        inputdiv.appendChild(input);
+        inputdiv.appendChild(hours);
+        div.appendChild(p2);
+        div.appendChild(inputdiv);
+        div.appendChild(p3)
+        div.appendChild(slider);
         this.appendChild(div);
     }
 }
@@ -129,7 +169,6 @@ function openDetails(e) {
 //
 // }
 
-var catSelected
 function selectCat(e) {
     this.setAttribute("style", "background-color: #ff6557;");
     let siblings = this.parentElement.children;
@@ -137,15 +176,14 @@ function selectCat(e) {
         siblings[i].removeAttribute("style");
     }
     this.setAttribute("style", "background-color: #ff6557;");
-    catSelected = false;
 }
 
 // Show the description of each category
 function showDesc(e) {
     e.preventDefault();
     //Check if it's open already
-    if (this.parentElement.children.length == CATEGORIES.length + 2) {
-        var child = this.parentElement.lastElementChild;
+    if (this.parentElement.children.length == CATEGORIES.length + 6) {
+        var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }
     // Possible place for optimization:
@@ -159,15 +197,15 @@ function showDesc(e) {
             p.setAttribute("class", "cat-desc")
             var text = document.createTextNode(CATDESCS[i-1]);
             p.appendChild(text);
-            this.parentElement.appendChild(p);
+            this.parentElement.insertBefore(p, this.parentElement.children[6]);
         }
     }
 }
 
 function hideDesc(e) {
     e.preventDefault();
-    if (this.parentElement.children.length == CATEGORIES.length + 2) {
-        var child = this.parentElement.lastElementChild;
+    if (this.parentElement.children.length == CATEGORIES.length + 6) {
+        var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }
 }
