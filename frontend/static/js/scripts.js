@@ -141,25 +141,46 @@ function openDetails(e) {
         let hours = document.createTextNode(" Hours ");
 
         let p3 = document.createElement("p");
-        let text3 = document.createTextNode("When does it need to be done by?")
+        let text3 = document.createTextNode("At what date and time should this be done?")
         p3.appendChild(text3);
+
+        let input2 = document.createElement("input");
+        input2.setAttribute("style", "width: 120px;");
+        input2.setAttribute("placeholder", "MM/DD/YY");
 
         let slider = document.createElement("input");
         slider.setAttribute("type","range");
         slider.setAttribute("min", "1");
-        slider.setAttribute("max", "100");
+        slider.setAttribute("max", "24");
         slider.setAttribute("value", "0");
         slider.setAttribute("class", "slider");
 
         let p4 = document.createElement("p");
-        let text4 = document.createTextNode(slider.value);
+        let text4 = document.createTextNode("12:00 am");
         p4.appendChild(text4);
+
+        slider.addEventListener('input', function () {
+            if (slider.value == 0) {
+                p4.innerHTML = `12:00 am`;
+            } else {
+                if (slider.value == 12) {
+                    p4.innerHTML = `12:00 pm`;
+                } else {
+                    if (slider.value < 12) {
+                        p4.innerHTML = `${slider.value}:00 am`;
+                    } else {
+                        p4.innerHTML = `${slider.value - 12}:00 pm`;
+                    }
+                }
+            }
+        }, false);
 
         inputdiv.appendChild(input);
         inputdiv.appendChild(hours);
         div.appendChild(p2);
         div.appendChild(inputdiv);
-        div.appendChild(p3)
+        div.appendChild(p3);
+        div.appendChild(input2);
         div.appendChild(slider);
         div.appendChild(p4);
         this.appendChild(div);
@@ -185,7 +206,7 @@ function selectCat(e) {
 function showDesc(e) {
     e.preventDefault();
     //Check if it's open already
-    if (this.parentElement.children.length == CATEGORIES.length + 7) {
+    if (this.parentElement.children.length == CATEGORIES.length + 8) {
         var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }
@@ -207,7 +228,7 @@ function showDesc(e) {
 
 function hideDesc(e) {
     e.preventDefault();
-    if (this.parentElement.children.length == CATEGORIES.length + 7) {
+    if (this.parentElement.children.length == CATEGORIES.length + 8) {
         var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }

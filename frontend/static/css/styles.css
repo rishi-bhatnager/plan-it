@@ -1,4 +1,4 @@
-html, body {margin:0;padding:0;height:100%;}
+html, body {margin:0; padding:0; height:100%;}
 
 @media(min-width:786px){
     .row {
@@ -22,6 +22,7 @@ body {
     background-color: #f7f7f7;
     color: #11b8ba;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 .top {
@@ -35,7 +36,7 @@ body {
 .subheading {
     text-align: center;
     background-color: #11b8ba;
-    border-bottom: 5px solid #f7f7f7;
+    border-bottom: 8px solid #f7f7f7;
     font-style: italic;
     color: #ebebeb;
     margin-top: 30px;
@@ -62,6 +63,7 @@ body {
     border-radius: 16px;
     flex: 1;
     position:relative;
+    margin-left: 8px;
 }
 
 .column2 {
@@ -195,7 +197,7 @@ tr:nth-child(even) {
 }
 
 .slider {
-    width:  95%;
+    width: 95%;
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     height: 15px; /* Specified height */
@@ -204,6 +206,7 @@ tr:nth-child(even) {
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
+    margin-top: 20px;
 }
 
 .slider::-webkit-slider-thumb {
