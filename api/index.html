@@ -66,7 +66,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-	  createEvent();
+	  createEvent(); 
           listUpcomingEvents();
         } else {
           authorizeButton.style.display = 'block';
@@ -105,7 +105,7 @@
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.
        */
-
+           
 
 function createEvent(){
 	var sched = {
@@ -123,7 +123,7 @@ function createEvent(){
 	};
 
 var makeRequest = function(resource) {
-
+  
   var request = gapi.client.calendar.events.insert({
     'calendarId': 'primary',
     'resource': resource

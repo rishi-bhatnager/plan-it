@@ -148,10 +148,12 @@ function openDetails(e) {
         slider.setAttribute("type","range");
         slider.setAttribute("min", "1");
         slider.setAttribute("max", "100");
-        slider.setAttribute("value", "50");
+        slider.setAttribute("value", "0");
         slider.setAttribute("class", "slider");
 
-        // <input type="range" min="1" max="100" value="50" class="slider">
+        let p4 = document.createElement("p");
+        let text4 = document.createTextNode(slider.value);
+        p4.appendChild(text4);
 
         inputdiv.appendChild(input);
         inputdiv.appendChild(hours);
@@ -159,6 +161,7 @@ function openDetails(e) {
         div.appendChild(inputdiv);
         div.appendChild(p3)
         div.appendChild(slider);
+        div.appendChild(p4);
         this.appendChild(div);
     }
 }
