@@ -21,16 +21,21 @@ var express = require('express'),
     path = require('path'),
     app = express();
 
+
 app.get('/index.html',function(req,res){
    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/styles.css',function(req,res){
-    res.sendFile(path.join(__dirname + '/styles.css'));
+app.get('/static/css/styles.css',function(req,res){
+    res.sendFile(path.join(__dirname + '/static/css/styles.css'));
 });
 
-app.get('/script.js',function(req,res){
-    res.sendFile(path.join(__dirname + '/script.js'));
+/*app.get('/backend/manage.py',function(req,res){
+    res.sendFile(path.join(__dirname + '/backend/manage.py'));
+});*/
+
+app.get('/static/js/script.js',function(req,res){
+    res.sendFile(path.join(__dirname + '/static/js/script.js'));
 });
 
 app.get('/', function(req, res) {
