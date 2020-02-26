@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = ['/Users/rishibhatnager/GT/PlannerApp/frontend/static']
+STATICFILES_DIRS = ['../../../PlannerApp/frontend/static']
 
 
 # Application definition

@@ -1,7 +1,10 @@
 html, body {margin:0;padding:0;height:100%;}
 
-.row {
-    height: 80%;
+@media(min-width:786px){
+    .row {
+        display: flex;
+        align-items: stretch;
+    }
 }
 
 h1 {
@@ -51,23 +54,21 @@ body {
 
 /* Create two equal columns that floats next to each other */
 .column1 {
-    float: left;
-    width: 35%;
     padding: 10px;
     padding-left: 3%;
     padding-right: 3%;
+    padding-bottom: 70px;
     background-color: #ebebeb;
     border-radius: 16px;
-    position: relative;
-    height:100%;
+    flex: 1;
+    position:relative;
 }
 
 .column2 {
-    float: left;
-    width: 65%;
     padding: 10px;
-    height: 600px; /* Should be removed. Only for demonstration */
     background-color:#f7f7f7;
+    flex: 2;
+    height: 600px;
 }
 
 
@@ -104,7 +105,6 @@ button {
     border: none;
     border-radius: 10px;
     margin-top: 10px;
-    margin-bottom: 50px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 16px;
     color: #f7f7f7;
@@ -157,19 +157,26 @@ tr:nth-child(even) {
     color: #11b8ba;
     border-radius: 10px;
     padding: 5px;
+    padding-left: 15px;
     margin-left: -20px;
+    align-content: center;
+}
+
+.details button {
+    border-radius: 15px;
+    border: 4px solid #ebebeb;
+    margin-top: -30px;
 }
 
 .bottom {
-    position: fixed;
-    bottom: 0;
-    left: 30;
-    width: 300px;
+    position: absolute;
+    right: 40px;
 }
 
 .compile {
     font-size: 24px;
     border-radius: 24px;
+    align-self: flex-end;
 }
 
 ::placeholder {
@@ -185,4 +192,26 @@ tr:nth-child(even) {
 
 .edit:hover {
     color: #159799;
+}
+
+.slider {
+    width:  95%;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 15px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  border-radius: 10px;
+  background: #11b8ba;
+  cursor: pointer; /* Cursor on hover */
 }

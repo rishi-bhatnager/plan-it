@@ -185,7 +185,7 @@ function selectCat(e) {
 function showDesc(e) {
     e.preventDefault();
     //Check if it's open already
-    if (this.parentElement.children.length == CATEGORIES.length + 6) {
+    if (this.parentElement.children.length == CATEGORIES.length + 7) {
         var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }
@@ -207,7 +207,7 @@ function showDesc(e) {
 
 function hideDesc(e) {
     e.preventDefault();
-    if (this.parentElement.children.length == CATEGORIES.length + 6) {
+    if (this.parentElement.children.length == CATEGORIES.length + 7) {
         var child = this.parentElement.children[6];
         this.parentElement.removeChild(child);
     }
