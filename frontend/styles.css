@@ -1,0 +1,217 @@
+html, body {margin:0;padding:0;height:100%;}
+
+@media(min-width:786px){
+    .row {
+        display: flex;
+        align-items: stretch;
+    }
+}
+
+h1 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 40px;
+    align-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: #11b8ba;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.top {
+    text-align: center;
+    background-color: #11b8ba;
+    color: #f7f7f7;
+    padding-top: 50px;
+    position: relative;
+}
+
+.subheading {
+    text-align: center;
+    background-color: #11b8ba;
+    border-bottom: 5px solid #f7f7f7;
+    font-style: italic;
+    color: #ebebeb;
+    margin-top: 30px;
+}
+
+.info {
+    column-count: 2;
+    column-width: 100px;
+    color: #11b8ba;
+    padding: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+    padding: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 70px;
+    background-color: #ebebeb;
+    border-radius: 16px;
+    flex: 1;
+    position:relative;
+}
+
+.column2 {
+    padding: 10px;
+    background-color:#f7f7f7;
+    flex: 2;
+    height: 600px;
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.entry{
+    color: #a8a8a8;
+    text-decoration: none;
+}
+
+.check {
+    color: #a8a8a8;
+    text-decoration: none;
+}
+
+.list-container {
+    background-color: #f7f7f7;
+    border-radius: 16px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.check:hover {
+    color: #ff6557;
+}
+
+button {
+    background-color: #11b8ba;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
+    color: #f7f7f7;
+}
+
+button:hover {
+    background-color: #159799;
+}
+
+input {
+    font-size: 16px;
+    border: none;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    color: #707070;
+}
+
+li {
+    list-style-type: none;
+    margin-left: -20px;
+    padding: 5px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 16px;
+    background-color: #ebebeb;
+    table-layout: auto;
+}
+
+td, th {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.schedule {
+    width: 100%;
+    height: 80%;
+    overflow: scroll;
+}
+
+.details {
+    background-color: #ebebeb;
+    color: #11b8ba;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 15px;
+    margin-left: -20px;
+    align-content: center;
+}
+
+.details button {
+    border-radius: 15px;
+    border: 4px solid #ebebeb;
+    margin-top: -30px;
+}
+
+.bottom {
+    position: absolute;
+    right: 40px;
+}
+
+.compile {
+    font-size: 24px;
+    border-radius: 24px;
+    align-self: flex-end;
+}
+
+::placeholder {
+    font-style: italic;
+    color: #a8a8a8;
+
+}
+
+.edit {
+    color: #11b8ba;
+    text-decoration: none;
+}
+
+.edit:hover {
+    color: #159799;
+}
+
+.slider {
+    width:  95%;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 15px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  border-radius: 10px;
+  background: #11b8ba;
+  cursor: pointer; /* Cursor on hover */
+}
