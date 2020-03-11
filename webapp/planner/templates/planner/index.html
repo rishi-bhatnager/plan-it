@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Plan It</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" defer>
+    <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <script type="text/javascript" src="static/js/script.js" defer></script> -->
+
+</head>
+
+<body>
+    <div class="top">
+        <div class="title">
+            <h1>plan it.<h1>
+        </div>
+      <div class="subheading">
+          <p>Creating your ideal schedule (Beta)</p>
+      </div>
+    </div>
+    <div class="row">
+        <div class="column1">
+            <h2>To Do</h2>
+            <div class="list-container">
+                <ul class="list">
+                </ul>
+            </div>
+            <input type="text" id="add-task" placeholder="Task Name"><br>
+            <button type="button" class="add">+ Add Task</button>
+            <div class="bottom">
+                <button type="button" class="compile">Compile Schedule</button>
+            </div>
+        </div>
+    <div class="column2">
+      <h2>Schedule</h2>
+        <div class="schedule">
+            <table>
+                <tr>
+                    <th>Time</th>
+                    <th>Task</th>
+                </tr>
+                <tr>
+                    <td>12:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11:00 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11:30 am</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:30 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11:00 pm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11:30 pm</td>
+                    <td></td>
+                </tr>
+         </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

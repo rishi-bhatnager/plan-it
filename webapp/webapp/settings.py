@@ -23,14 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False                                                                                                #change later
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']                                                                                 #not safe to use wildcard if deploying outside of GCP
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'webapp.apps.PlannerWrapperConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'webapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],                                                             #might need to change depending on where other files (e.g. html) are located
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,12 +75,61 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+
+#Below = establishes connection to GCP SQL servers
+
+# Install PyMySQL as mysqlclient/MySQLdb to use Django's mysqlclient adapter
+# See https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-db-api-drivers
+# for more information
+import pymysql  # noqa: 402
+pymysql.version_info = (1, 3, 13, "final", 0)
+pymysql.install_as_MySQLdb()
+
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/planner-app-265519:us-east1:planner',                    #replace last block (after /) with ~connection name~ of SQL server
+            'USER': 'planner-user',                                                                  #replace with SQL DB user
+            'PASSWORD': 'smith-gang-v3',                                                            #replace with SQL DB user password
+            'NAME': 'planner',                                                                       #replace with database sql instance?
+        }
+    }
+else:
+    # Running locally so connect to either a local MySQL instance or connect to
+    # Cloud SQL via the proxy. To start the proxy via command line:
+    #
+    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    #
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {                                                                                #see above if statement for necessary replacements
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': 'localhost',
+            'PORT': '3306',
+            'NAME': 'planner',
+            'USER': 'planner-local',
+            'PASSWORD': 'smith-gang-v3',
+        }
+    }
+# [END db_setup]
+
+
+
+#Below = default
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
+}"""
+
+
+
+
 
 
 # Password validation
@@ -117,4 +168,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = 'collect_static'
 STATIC_URL = '/static/'
