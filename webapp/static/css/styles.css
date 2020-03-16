@@ -29,17 +29,16 @@ body {
     text-align: center;
     background-color: #11b8ba;
     color: #f7f7f7;
-    padding-top: 50px;
+    padding-top: 10px;
     position: relative;
 }
 
 .subheading {
     text-align: center;
     background-color: #11b8ba;
-    border-bottom: 8px solid #f7f7f7;
     font-style: italic;
     color: #ebebeb;
-    margin-top: 30px;
+    margin-top: -15px;
 }
 
 .info {
@@ -116,24 +115,15 @@ button:hover {
     background-color: #f7f7f7;
 }
 
-
-                                                                                                    /* Rishi edits, remove if screws up */
-.signin button {
-    background-color: #ebebeb;
-    border: none;
-    border-radius: 10px;
-    margin-top: 10px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 16px;
-    color: #11b8ba;
+.signin {
+  background-color: #f7f7f7;
+  color: #11b8ba;
+  margin-right: 15px;
 }
 
-.signin:hover {
-    background-color: #159799;
+.login {
+  background-color: #11b8ba;
 }
-
-                                                                                                            /* end Rishi edits */
-
 
 input {
     font-size: 16px;

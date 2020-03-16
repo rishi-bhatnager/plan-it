@@ -113,8 +113,23 @@ button {
 }
 
 button:hover {
-    background-color: #159799;
+    background-color: #f7f7f7;
 }
+
+
+                                                                                                    /* Rishi edits, remove if screws up */
+.signin {
+  background-color: #f7f7f7;
+  color: #11b8ba;
+  margin-right: 15px;
+}
+
+.login {
+  background-color: #000000;
+}
+
+                                                                                                            /* end Rishi edits */
+
 
 input {
     font-size: 16px;
