@@ -113,8 +113,27 @@ button {
 }
 
 button:hover {
+    background-color: #f7f7f7;
+}
+
+
+                                                                                                    /* Rishi edits, remove if screws up */
+.signin button {
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
+    color: #11b8ba;
+}
+
+.signin:hover {
     background-color: #159799;
 }
+
+                                                                                                            /* end Rishi edits */
+
 
 input {
     font-size: 16px;
