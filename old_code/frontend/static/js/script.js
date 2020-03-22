@@ -146,13 +146,23 @@ function openDetails(e) {
 
         let input2 = document.createElement("input");
         input2.setAttribute("style", "width: 120px;");
-        input2.setAttribute("placeholder", "MM/DD/YY");
+
+        //Get the current date:
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        today = today.substr(0, 8);
+
+        input2.setAttribute("value", today);
 
         let slider = document.createElement("input");
         slider.setAttribute("type","range");
         slider.setAttribute("min", "1");
         slider.setAttribute("max", "24");
-        slider.setAttribute("value", "0");
+        slider.setAttribute("value", "1");
         slider.setAttribute("class", "slider");
 
         let p4 = document.createElement("p");
@@ -160,16 +170,16 @@ function openDetails(e) {
         p4.appendChild(text4);
 
         slider.addEventListener('input', function () {
-            if (slider.value == 0) {
-                p4.innerHTML = `12:00 am`;
+            if (slider.value == 1) {
+                p4.innerHTML = "12:00 am";
             } else {
-                if (slider.value == 12) {
-                    p4.innerHTML = `12:00 pm`;
+                if (slider.value == 13) {
+                    p4.innerHTML = "12:00 pm";
                 } else {
-                    if (slider.value < 12) {
-                        p4.innerHTML = `${slider.value}:00 am`;
+                    if (slider.value < 13) {
+                        p4.innerHTML = `${slider.value - 1}:00 am`;
                     } else {
-                        p4.innerHTML = `${slider.value - 12}:00 pm`;
+                        p4.innerHTML = `${slider.value - 13}:00 pm`;
                     }
                 }
             }

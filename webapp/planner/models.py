@@ -1,8 +1,8 @@
-import datetime
 from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 import time
+import datetime
 
 class Task(models.Model):
     name = models.CharField(max_length=50)

@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# BASE_URL = pass
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -33,6 +34,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 INSTALLED_APPS = [
     'webapp.apps.PlannerWrapperConfig',
+    'webapp.apps.UsersWrapperConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -176,6 +179,15 @@ AUTH_PASSWORD_VALIDATORS = [
 #     }
 # }
 
+
+# Django login settings                                                                                             complete and uncomment below
+# LOGIN_REDIRECT_URL = where to send users after successful login
+#     ^ (default is 'accounts/profile', so only set if not using this default)
+# LOGOUT_REDIRECT_URL = where to redirect users after logging out
+# LOGIN_URL = url for login page
+#     ^ (default is 'accounts/login', so only set if not using this default)
+# DEFAULT_FROM_EMAIL = email from which to send automated messages (such as password reset)
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -196,3 +208,5 @@ USE_TZ = True
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, '../collect_static')
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
