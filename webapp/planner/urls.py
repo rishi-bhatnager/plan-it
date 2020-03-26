@@ -4,6 +4,6 @@ from . import views
 
 app_name = 'planner'
 urlpatterns = [
-    path('index.html', views.IndexView.as_view(), name='index'),
-    path('', views.IndexView.as_view(), name='index'),
+    path('index.html', views.sendToIndex, name='indexRedirect'),
+    path('', views.index, name='index'),
 ]

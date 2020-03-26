@@ -181,12 +181,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Django login settings                                                                                             complete and uncomment below
-# LOGIN_REDIRECT_URL = where to send users after successful login
-#     ^ (default is 'accounts/profile', so only set if not using this default)
-# LOGOUT_REDIRECT_URL = where to redirect users after logging out
-# LOGIN_URL = url for login page
-#     ^ (default is 'accounts/login', so only set if not using this default)
-# DEFAULT_FROM_EMAIL = email from which to send automated messages (such as password reset)
+from django.urls import reverse_lazy
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'users:login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'rishibhatnager01@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('PLANNER_APP_GMAIL_PASSWORD')
+DEFAULT_FROM_EMAIL = 'rishibhatnager01@gmail.com'
+
+# LOGOUT_REDIRECT_URL = '/users/logout'
+    # ^ caused some problems, prob leave commented out
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

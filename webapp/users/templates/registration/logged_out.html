@@ -2,13 +2,11 @@
 
 {% block content %}
 
-<div class="top">
-    <div class="title">
-        <h1>plan it.</h1>
-    </div>
-    <div class="subheading">
-        <p>Logout</p>
-    </div>
+<h2>You have been logged out successfully</h2>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <a href=" {% url 'users:login' %} ">Log In Again</a>
+    </small>
 </div>
 
 {% endblock %}

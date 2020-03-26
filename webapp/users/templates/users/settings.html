@@ -1,0 +1,12 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+<h2>{{user.username}}</h2>
+<div class="border-top pt-3">
+    <p>
+        <a href=" {% url 'users:change_password' %} ">Change Password</a>
+    </p>
+</div>
+
+{% endblock %}

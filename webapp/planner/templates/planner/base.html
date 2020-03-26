@@ -24,13 +24,26 @@
 </head>
 
 <body>
-    <div>
+    <div>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
     </div>
+    {% if user.is_authenticated %}
+        <div align="right" class="mr-4">
+            <p>Welcome, {{user.get_username}}</p>
+            <button class="signin" onclick="location.href=' {% url 'users:logout' %}'">Log Out</button>
+            <button class="signin" onclick="location.href=' {% url 'users:settings' %}'">Settings</button>
+        </div>
+    {% else %}
+        <div align="right" class="login">
+            <button class="signin" onclick="location.href=' {% url 'users:register' %}'">Sign Up</button>
+            <button class="signin" onclick="location.href=' {% url 'users:login' %}'">Log In</button>
+        </div>
+    {% endif %}
+    
 
     {% block content %}
     {% endblock %}

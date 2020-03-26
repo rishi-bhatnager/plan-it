@@ -1,16 +1,38 @@
 <!-- see Authentication Views > All authentication views > class LoginView for what has to be implemented here, what's passed in, etc -->
 
 {% extends 'planner/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <div class="top">
-    <div class="title">
-        <h1>plan it.</h1>
-    </div>
-    <div class="subheading">
-        <p>Login</p>
+        <div class="title">
+            <h1>plan it.</h1>
+        </div>
+        <div class="subheading">
+            <p>Login</p>
+        </div>
+    </div>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Log In</legend>
+            {{ form|crispy }}
+            <small class="text-muted">
+                <a class="ml-2" href=" {% url 'users:password_reset' %} ">Forgot your password?</a>
+            </small>
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="signin">Login</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Don't Have an Account Yet? <a class="ml-2" href=" {% url 'users:register' %} ">Sign Up</a>
+        </small>
     </div>
 </div>
 
 {% endblock %}
+

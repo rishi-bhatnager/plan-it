@@ -11,7 +11,7 @@
             <p>Create Account</p>
         </div>
     </div>
-<div>
+<div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -24,7 +24,7 @@
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Already Have an Account? <a class="ml-2" href="accounts/login">Sign In</a>
+            Already Have an Account? <a class="ml-2" href=" {% url 'users:login' %} ">Log In</a>
         </small>
     </div>
 </div>
