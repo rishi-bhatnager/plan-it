@@ -29,16 +29,17 @@ body {
     text-align: center;
     background-color: #11b8ba;
     color: #f7f7f7;
-    padding-top: 10px;
+    padding-top: 50px;
     position: relative;
 }
 
 .subheading {
     text-align: center;
     background-color: #11b8ba;
+    border-bottom: 8px solid #f7f7f7;
     font-style: italic;
     color: #ebebeb;
-    margin-top: -15px;
+    margin-top: 30px;
 }
 
 .info {
@@ -115,6 +116,8 @@ button:hover {
     background-color: #f7f7f7;
 }
 
+
+                                                                                                    /* Rishi edits, remove if screws up */
 .signin {
   background-color: #f7f7f7;
   color: #11b8ba;
@@ -122,8 +125,11 @@ button:hover {
 }
 
 .login {
-  background-color: #11b8ba;
+  background-color: #000000;
 }
+
+                                                                                                            /* end Rishi edits */
+
 
 input {
     font-size: 16px;
@@ -226,4 +232,41 @@ tr:nth-child(even) {
   border-radius: 10px;
   background: #11b8ba;
   cursor: pointer; /* Cursor on hover */
+}
+
+.navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 30px;
+    overflow: hidden;
+    background-color: #11b8ba;
+}
+
+.navbar a {
+  display: block;
+  color: #f7f7f7;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 0px;
+  text-decoration: none;
+}
+
+.active {
+  background-color: #ff6557;
+}
+
+.active {
+  background-color: #ff6557;
+}
+
+.navbar li a:hover {
+  background-color: #159799;
+}
+
+.left-nav li {
+  float: left;
+}
+
+.right-nav li {
+  float: right;
 }

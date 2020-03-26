@@ -90,7 +90,6 @@ function compileList() {
     }
 }
 
-
 // Show task details
 function openDetails(e) {
     e.preventDefault();
