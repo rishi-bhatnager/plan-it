@@ -68,7 +68,7 @@ class PasswordChangeView(views.PasswordChangeView):
 
 class PasswordResetView(views.PasswordResetView):
     def get(self, request):
-        return render(request, self.template_name, {'form': self.form_class, 'title': 'password reset'})
+        return render(request, self.template_name, {'form': self.form_class, 'title': 'reset password'})
 
 
 class PasswordResetDoneView(views.PasswordResetDoneView):
