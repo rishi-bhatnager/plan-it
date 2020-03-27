@@ -11,7 +11,7 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name='login'),
     path('logout', views.LogoutView.as_view(), name='logout'),
     path('settings', views.settings, name='settings'),
-    path('change-password', views.PasswordChangeView.as_view(success_url=reverse_lazy('planner:index')), name='change_password'),
+    path('change-password', views.PasswordChangeView.as_view(success_url=reverse_lazy('mom:index')), name='change_password'),
     # path('password_change_done', views.password_change_done, name='password_change_done'),
         # ^ not necessary rn bc successful password change set to redirect to home page
     path('password-reset', views.PasswordResetView.as_view(success_url=reverse_lazy('users:password_reset_done')), name='password_reset'),

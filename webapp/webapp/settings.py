@@ -180,7 +180,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # }
 
 
-# Django login settings                                                                                             complete and uncomment below
+# Django login settings
 from django.urls import reverse_lazy
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'users:login'
@@ -192,6 +192,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rishibhatnager01@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('PLANNER_APP_GMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = 'rishibhatnager01@gmail.com'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGOUT_REDIRECT_URL = '/users/logout'
     # ^ caused some problems, prob leave commented out
@@ -217,5 +219,3 @@ USE_TZ = True
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, '../collect_static')
 STATIC_URL = '/static/'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
