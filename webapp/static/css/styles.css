@@ -25,29 +25,12 @@ body {
     font-size: 16px;
 }
 
-.top {
-    text-align: center;
-    background-color: #11b8ba;
-    color: #f7f7f7;
-    padding-top: 50px;
-    position: relative;
-}
-
-.subheading {
-    text-align: center;
-    background-color: #11b8ba;
-    border-bottom: 8px solid #f7f7f7;
-    font-style: italic;
-    color: #ebebeb;
-    margin-top: 30px;
-}
-
-.info {
+/* .info {
     column-count: 2;
     column-width: 100px;
     color: #11b8ba;
     padding: 20px;
-}
+} */
 
 * {
     box-sizing: border-box;
@@ -56,14 +39,15 @@ body {
 /* Create two equal columns that floats next to each other */
 .column1 {
     padding: 10px;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
     padding-bottom: 70px;
     background-color: #ebebeb;
     border-radius: 16px;
     flex: 1;
     position:relative;
-    margin-bottom: 20px;
+    margin: 20px;
+    margin-top: 0px;
     box-shadow: 0px 0px 20px #c2c2c2;
 }
 

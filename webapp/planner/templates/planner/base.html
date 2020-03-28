@@ -4,59 +4,59 @@
 
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    {% if title %}
-        <title>{{ title }}</title>
-    {% else %}
-        <title>plan it</title>
-    {% endif %}
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>plan it</title>
+	{% endif %}
 
 
-    <meta name="description" content="The HTML5 Herald">
-    <meta name="author" content="SitePoint">
+	<meta name="description" content="The HTML5 Herald">
+	<meta name="author" content="SitePoint">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
-    <!-- <link rel="stylesheet" type="text/css" href="static/css/styles.css">
-    <script type="text/javascript" src="static/js/script.js" defer></script> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+	<script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+	<!-- <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+	<script type="text/javascript" src="static/js/script.js" defer></script> -->
 
 </head>
 
 <body>
-    <div class="navbar">
-        <ul>
-            <div class= "left-nav">
-                <div class="logo">
-                    <a href="{% url 'planner:index' %}"><img src="https://i.ibb.co/8N1wJJr/planit2.png" alt="planit2" border="0" width="50"/></a>
-                </div>
-                <!-- <li><a class="active" href="{% url 'planner:index' %}">Plan</a></li> -->
-                <!-- <li><a href="#about">How it Works</a></li>
-                <li><a href="#contact">Contact</a></li> -->
-            </div>
-            <div class="right-nav">
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'users:logout' %}">Log Out</a></li>
-                    <li><a href="{% url 'users:settings' %}">Settings</a></li>
-                {% else %}
-                    <li><a href="{% url 'users:login' %}">Log In</a></li>
-                    <li><a href="{% url 'users:register' %}">Sign Up</a></li>
-                {% endif %}
-            </div>
-        </ul>
-    </div>
+	<div class="navbar">
+		<ul>
+			<div class= "left-nav">
+				<div class="logo">
+					<a href="{% url 'planner:index' %}"><img src="https://i.ibb.co/8N1wJJr/planit2.png" alt="planit2" border="0" width="50"/></a>
+				</div>
+				<!-- <li><a class="active" href="{% url 'planner:index' %}">Plan</a></li> -->
+				<!-- <li><a href="#about">How it Works</a></li>
+				<li><a href="#contact">Contact</a></li> -->
+			</div>
+			<div class="right-nav">
+				{% if user.is_authenticated %}
+					<li><a href="{% url 'users:logout' %}">Log Out</a></li>
+					<li><a href="{% url 'users:settings' %}">Settings</a></li>
+				{% else %}
+					<li><a href="{% url 'users:login' %}">Log In</a></li>
+					<li><a href="{% url 'users:register' %}">Sign Up</a></li>
+				{% endif %}
+			</div>
+		</ul>
+	</div>
 
-    <div>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
+	<div>
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+	</div>
     
 
-    {% block content %}
-    {% endblock %}
+	{% block content %}
+	{% endblock %}
 
 </body>
 </html>
