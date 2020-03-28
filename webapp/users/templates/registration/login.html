@@ -5,15 +5,6 @@
 
 {% block content %}
 
-<div class="top">
-        <div class="title">
-            <h1>plan it.</h1>
-        </div>
-        <div class="subheading">
-            <p>Login</p>
-        </div>
-    </div>
-<div>
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -35,4 +26,3 @@
 </div>
 
 {% endblock %}
-

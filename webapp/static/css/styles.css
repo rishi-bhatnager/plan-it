@@ -113,7 +113,7 @@ button {
 }
 
 button:hover {
-    background-color: #f7f7f7;
+    background-color: #159799;
 }
 
 
@@ -242,7 +242,7 @@ tr:nth-child(even) {
     background-color: #11b8ba;
 }
 
-.navbar a {
+.navbar li a {
   display: block;
   color: #f7f7f7;
   text-align: center;
@@ -263,7 +263,7 @@ tr:nth-child(even) {
   background-color: #159799;
 }
 
-.left-nav li {
+.logo {
   float: left;
 }
 
