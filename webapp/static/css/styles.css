@@ -223,13 +223,13 @@ tr:nth-child(even) {
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 15px; /* Set a specific slider handle width */
-  height: 15px; /* Slider handle height */
-  border-radius: 10px;
-  background: #11b8ba;
-  cursor: pointer; /* Cursor on hover */
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    border-radius: 10px;
+    background: #11b8ba;
+    cursor: pointer; /* Cursor on hover */
 }
 
 .navbar ul{
@@ -242,24 +242,24 @@ tr:nth-child(even) {
 }
 
 .navbar li a {
-  display: block;
-  color: #f7f7f7;
-  text-align: center;
-  padding: 14px 16px;
-  margin: 0px;
-  text-decoration: none;
+    display: block;
+    color: #f7f7f7;
+    text-align: center;
+    padding: 14px 16px;
+    margin: 0px;
+    text-decoration: none;
 }
 
 .active {
-  background-color: #ff6557;
+    background-color: #ff6557;
 }
 
 .active {
-  background-color: #ff6557;
+    background-color: #ff6557;
 }
 
 .navbar li a:hover {
-  background-color: #159799;
+    text-shadow: 0px 0px 20px #000000;
 }
 
 .logo {
