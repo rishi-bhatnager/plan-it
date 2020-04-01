@@ -25,29 +25,12 @@ body {
     font-size: 16px;
 }
 
-.top {
-    text-align: center;
-    background-color: #11b8ba;
-    color: #f7f7f7;
-    padding-top: 50px;
-    position: relative;
-}
-
-.subheading {
-    text-align: center;
-    background-color: #11b8ba;
-    border-bottom: 8px solid #f7f7f7;
-    font-style: italic;
-    color: #ebebeb;
-    margin-top: 30px;
-}
-
-.info {
+/* .info {
     column-count: 2;
     column-width: 100px;
     color: #11b8ba;
     padding: 20px;
-}
+} */
 
 * {
     box-sizing: border-box;
@@ -56,14 +39,16 @@ body {
 /* Create two equal columns that floats next to each other */
 .column1 {
     padding: 10px;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
     padding-bottom: 70px;
     background-color: #ebebeb;
     border-radius: 16px;
     flex: 1;
     position:relative;
-    margin-left: 8px;
+    margin: 20px;
+    margin-top: 0px;
+    box-shadow: 0px 0px 20px #c2c2c2;
 }
 
 .column2 {
@@ -113,10 +98,8 @@ button {
 }
 
 button:hover {
-    background-color: #f7f7f7;
+    background-color: #159799;
 }
-
-
                                                                                                     /* Rishi edits, remove if screws up */
 .signin {
   background-color: #f7f7f7;
@@ -129,7 +112,6 @@ button:hover {
 }
 
                                                                                                             /* end Rishi edits */
-
 
 input {
     font-size: 16px;
@@ -225,11 +207,49 @@ tr:nth-child(even) {
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 15px; /* Set a specific slider handle width */
-  height: 15px; /* Slider handle height */
-  border-radius: 10px;
-  background: #11b8ba;
-  cursor: pointer; /* Cursor on hover */
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    border-radius: 10px;
+    background: #11b8ba;
+    cursor: pointer; /* Cursor on hover */
+}
+
+.navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 30px;
+    overflow: hidden;
+    background-color: #11b8ba;
+    box-shadow: 0px 0px 20px #c2c2c2;
+}
+
+.navbar li a {
+    display: block;
+    color: #f7f7f7;
+    text-align: center;
+    padding: 14px 16px;
+    margin: 0px;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #ff6557;
+}
+
+.active {
+    background-color: #ff6557;
+}
+
+.navbar li a:hover {
+    text-shadow: 0px 0px 20px #000000;
+}
+
+.logo {
+  float: left;
+}
+
+.right-nav li {
+  float: right;
 }

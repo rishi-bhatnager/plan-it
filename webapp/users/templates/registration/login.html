@@ -1,7 +1,7 @@
 <!-- see Authentication Views > All authentication views > class LoginView for what has to be implemented here, what's passed in, etc -->
 
 {% extends 'planner/base.html' %}
-{% load crispy_forms_tags %}
+
 
 {% block content %}
 
@@ -9,7 +9,7 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Log In</legend>
-            {{ form|crispy }}
+            {{ form.as_p }}
             <small class="text-muted">
                 <a class="ml-2" href=" {% url 'users:password_reset' %} ">Forgot your password?</a>
             </small>

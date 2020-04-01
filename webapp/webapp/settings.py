@@ -35,7 +35,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 INSTALLED_APPS = [
     'webapp.apps.PlannerWrapperConfig',
     'webapp.apps.UsersWrapperConfig',
-    'crispy_forms',
+    # 'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

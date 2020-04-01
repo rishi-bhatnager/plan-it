@@ -1,5 +1,10 @@
-runtime: python37                                                                       #NOTE: MAY NEED TO CHANGE CODE BELOW
-                                                                                      # DEPENDING ON LOCATION OF STATIC DIR
+runtime: python37
+#env: flex
+#entrypoint: gunicorn -b :$PORT webapp.wsgi
+
+
+# NOTE: MAY NEED TO CHANGE CODE BELOW DEPENDING ON LOCATION OF STATIC DIR
+
 handlers:
 # This configures Google App Engine to serve the files in the app's static
 # directory.
@@ -11,3 +16,9 @@ handlers:
 # the entire handlers section) when there are no static files defined.
 - url: /.*
   script: auto
+
+# # [START libraries]
+# libraries:
+# - name: crispy_forms
+#  version: latest
+# # [END libraries]
