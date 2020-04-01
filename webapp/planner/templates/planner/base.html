@@ -35,19 +35,14 @@
 				<li><a href="#contact">Contact</a></li> -->
 			</div>
 			<div class="right-nav">
-				{% if user.is_authenticated %}
-					<div class="dropdown">
-                        <button class="dropbtn">{{ user.get_username }}</button>
-                        <div class="dropdown-content">
-                            <a href="{% url 'users:settings' %}">Settings</a>
-                            <a href="{% url 'users:logout' %}">Log Out</a>
-                        </div>
-                    </div>
-				{% else %}
-					<li><a href="{% url 'users:login' %}">Log In</a></li>
-					<li><a href="{% url 'users:register' %}">Sign Up</a></li>
-				{% endif %}
-			</div>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+                    <li><a href="{% url 'users:settings' %}">Settings</a></li>
+                {% else %}
+                    <li><a href="{% url 'users:login' %}">Log In</a></li>
+                    <li><a href="{% url 'users:register' %}">Sign Up</a></li>
+                {% endif %}
+            </div>
 		</ul>
 	</div>
 
