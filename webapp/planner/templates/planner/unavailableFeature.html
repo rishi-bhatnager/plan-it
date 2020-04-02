@@ -1,0 +1,24 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+<script>
+    function redirect(){
+       window.location.href = '{{ redirect }}';
+    }
+
+    setTimeout(redirect, 10000); //2000 is equivalent to 2 seconds
+</script>
+
+<h2>Sorry, we are currently fixing this feature</h2>
+<p>
+    If you are not redirected in 10 seconds, please click <a class="ml-2" href={{ redirect }}>here</a>
+    to return to the previous page,
+</p>
+<p>
+    or click <a class="ml-2" href=" {% url 'planner:index' %} ">here</a>
+    to return to the home page.
+</p>
+
+
+{% endblock %}

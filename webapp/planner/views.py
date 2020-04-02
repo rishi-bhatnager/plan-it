@@ -16,3 +16,7 @@ def index(request):
 
 def sendToIndex(request):
     return redirect(reverse('planner:index'))
+
+def unavailableFeature(request):
+    return render(request, 'planner/unavailableFeature.html',
+        {'title': 'Feature under Construction', 'redirect': request.META.get('HTTP_REFERER')})
