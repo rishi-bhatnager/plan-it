@@ -5,11 +5,23 @@ import time
 import datetime
 
 class Task(models.Model):
-    name = models.CharField(max_length=50)
-    category = models.CharField(max_length=20)
-    expTime = models.DurationField("expected time for completion")
-    dueDate = models.DateTimeField("due date")
-    addDate = models.DateTimeField("time when task was added", default=timezone.now)
+    # NOTE: Django auto adds an auto-incrementing 'id' field --> create a field and set primary_key=True
+        # to create custom id fields for tasks
+    # ALSO: can specify IDs when saving Tasks to database
+
+    name = models.CharField("Task Name", max_length=50, db_index=True)
+        # optional first positional arg = human readable name
+    category = models.CharField(max_length=50, choices = [
+        ('Ex', 'Exercise'),
+        ('Leis', 'Leisure'),
+        ('House', 'Household'),
+        ('Pers', 'Personal'),
+        ('Work', 'Work'),
+        ('', 'None'),
+        ], default='')
+    expTime = models.DurationField("Expected Time for Completion", help_text="Enter the amount of time you expect to complete this task")
+    dueDate = models.DateTimeField("Due Date", help_text="Enter by when must this task be completed")
+    addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
 
     def __str__(self):
         return self.name
@@ -31,6 +43,11 @@ class Task(models.Model):
     #returns time from now til due date
     def timeTilDue(self):
         return self.dueDate - timezone.now()
+
+    #saves a task to the database by first checking its validity and then using Django's save method
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)   #calls Django's save()
 
 
 

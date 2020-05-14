@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False                                                                                                #change later
+DEBUG = True                                                                                                #change later
 
 ALLOWED_HOSTS = ['*']                                                                                 #not safe to use wildcard if deploying outside of GCP
 
