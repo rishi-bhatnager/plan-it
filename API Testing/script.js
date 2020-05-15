@@ -101,11 +101,11 @@ function createEvent(summary,location,startTime,endTime){
   'location': location,
   'description': 'A chance to hear more about Google\'s developer products.',
   'start': {
-  'dateTime': ('2020-03-06T' + startTime + ':00-07:00'),
+  'dateTime': ('2020-06-06T' + startTime + ':00-07:00'),
 
   },
   'end': {
-  'dateTime': ('2020-03-06T' + endTime + ':00-07:00'),
+  'dateTime': ('2020-06-06T' + endTime + ':00-07:00'),
   }
   };
   return sched;
