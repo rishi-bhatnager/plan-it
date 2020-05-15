@@ -44,6 +44,49 @@ Possible Points of Failure:
 
 6. Tasks can be broken up into smaller pieces. How do we handle this?
 
-7. People can't predict how long things will take. 
+7. People can't predict how long things will take.
 
 8. Working while eating.
+
+
+
+Rishi's Brain Dump (it's formatted better on the Google Doc):
+We create a 48x5 matrix (48 rows for each ½ hour in the day, 5 columns for each category), and each cell will correspond to a [0,1) “productivity index” (PI) that indicates how productive the user is likely to be for the corresponding category at the corresponding time
+PI = 0 at times where user cannot work (sleep, meal, pre-planned event, etc), and some buffer around times when they cannot work (to account for sleeping in, eating longer than expected, travel time, or whatever)
+The PI of each cell will be calculated based on a number of factors:
+Proximity to predetermined “busy times” (sleep, meal, etc) → closer to busy time = lower PI (bc of chance of falling behind during the busy time, like sleeping in)
+Relationship btw distance to busy time (number of slots from current to nearest busy time slot) and probability of spillover needs to be determined but I’d guess there’s a roughly-exponential dropoff
+Exponential dropoff meaning that if we were to graph 1 - PI (an “unproductivity index”) vs. distance to nearest busy time, then it would probably look somewhat like a y=x^3
+Survey results
+Research on productivity (quantifiable metrics that our model can reasonably measure that make people more/less productive)
+User history (how they have done in the past at that time slot for each category)
+A little bit of randomness (our model will by no means be accurate at the start—and even as we go forward—so we need some way to get sufficient variation in our predictions for more data towards unsupervised learning)
+Probably other stuff I’m forgetting
+The model will then give each task a “priority rating” (PR) based on (in rough order of most to least influence):
+Task priority assigned by user (if they gave that task)
+Maybe: importance of associated category (if this is something we can/want to measure)
+Immediacy (more immediate due date = higher PR)
+Duration (longer expected time for completion = higher PR)
+Likelihood of efficiency for each task (calculated based on excitement for that task, if set by user, and user’s history based on related tasks; defaults to average if none of these metrics are available)
+Possibly some degree of randomness (not a lot, but enough to promote sufficient variation in the predictions the model outputs, and more variation = more data to train the model in unsupervised learning)
+This is also a good idea under the assumption that our model’s prediction will be close to correct, but somewhat off, therefore randomness will give a ~50-50 shot of getting closer to the correct prediction
+Maybe other stuff
+Generally, for each of the 30-minute time slots, there will be a “winning” category, i.e. the category with the highest PI
+If all PIs = 0, then this slot is reserved for no work
+If all PIs are low (threshold TBD), then this slot should maybe be reserved for a break
+Also, if there’s too many consecutive slots reserved for work, the slot with the lowest PI associated to the winning category should be reserved for a break (e.g. if there’s a string of 5 hours with winning categories having a PI > .8, then there must be 1 ½ hour break which should be chosen based on 2 criteria: closest to the middle of the interval and lowest winning category PI)
+Similarly, if the user specified how many ½ hours they would like to work (either overall or for specific categories), then after we compile the full schedule we need to make sure we haven’t exceeded these limits (again, for each individual category or the schedule as a whole, depending on what the user entered)
+Winning (scheduled) tasks with lowest associated PR will be reserved as buffer time (meaning we’ll suggest tasks that can be completed in priority order, but the user can do whatever they want with that time, including not work)
+Maybe do this as we’re compiling the schedule, but then the model may remove more work time from the end of the day after beginning-of-the-day tasks are already scheduled, even if the user would have been more productive at night
+The algorithm will assess which task within the winning category should be scheduled for this slot based on:
+Tasks’ PR
+Last time each task was scheduled/performed (don’t want to be doing the same task 3 distinct times within like 2 hours)
+Other stuff outside of the PR metric that is dependent on the specific time slot (i.e. not generalizable to the task as a whole)
+Maybe other stuff??
+Apart from the buffer time scheduled around the user’s “busy times,” we can set buffer times throughout the day (mainly additional buffers around the busy times) during which we suggest that the user works (and we can maybe even give them a suggested priority list of tasks to do during each buffer or during buffers as a whole). However, we won’t schedule specific tasks during these times because…
+It’ll make the algo more accurate (the less times we have to predict, the more accurate we can be)
+It’ll help account for the user falling behind schedule (if they fall behind, they use the buffers to catch up, otherwise they do more work or take a break during the buffer if they feel that’s necessary)
+In terms of how the algo does this, I’m thinking:
+The main NN (neural net) will compute the PI matrix
+A separate NN will compute the priority orderings of tasks within each category
+Finally, we could probably use a simpler ML model (regression or simple classification, like SVM, KNN, or whatever, depending on how this all works out during implementation) to compute the final schedule (i.e. scheduling specific tasks during each time slot) given the results of the NNs
