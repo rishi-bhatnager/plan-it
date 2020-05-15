@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 from datetime import timedelta
-import time
-import datetime
 
 class Task(models.Model):
 
@@ -10,7 +9,7 @@ class Task(models.Model):
         #earliest() gets first result, meaning earliest addDate is selected; dueDate = tiebreaker
         get_latest_by = ['addDate', 'dueDate']
 
-        ordering = ['name', 'category', 'addDate', 'dueDate', 'expTime']
+        ordering = ['name', 'category', 'user', 'addDate', 'dueDate', 'expTime', ]
 
 
     # NOTE: Django auto adds an auto-incrementing 'id' field --> create a field and set primary_key=True
@@ -27,9 +26,20 @@ class Task(models.Model):
         ('Work', 'Work'),
         ('', 'None'),
         ], default='')
+
+    # The user to which this task belongs
+    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+        # NOTES:
+        #   - Used ForeignKey so that if associated user is deleted then their tasks are also deleted (that's what the
+        #       on_delete parameter does), but may need to switch to ManyToManyField for task sharing (so a single task
+        #       can be associated with multiple users if, for example, the creating user invites other users onto the task)
+        #   - Since there is a default of None, be sure to check that users aren't None before dealing with them
+
     addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
     dueDate = models.DateTimeField("Due Date", help_text="Enter by when must this task be completed")
     expTime = models.DurationField("Expected Time for Completion", help_text="Enter the amount of time you expect to complete this task")
+
+
 
     '''List containing tuples of length 3
 
@@ -40,9 +50,10 @@ class Task(models.Model):
             2. A DurationField representing for how long this particular instance is scheduled
             3. A BooleanField representing whether this particular instance was scheduled effectively
 
-        This represents a one-to-many relationship (one task maps to many times), but this doesn't exist in Django,
-            hence the many-to-many field, which maps both ways: you can list all the ScheduleInstances associated with a
-            particular Task as well as all Tasks associated with a particular ScheduleInstance.
+        Assuming (for now) multiple tasks can be scheduled during the same istance, this represents a many-to-many
+            relationship (one task maps to many times, and a time can map to multiple tasks). Since this maps both ways,
+            you can list all the ScheduleInstances associated with a particular Task as well as all Tasks associated
+            with a particular ScheduleInstance.
         The times field will map to ScheduleInstance objects containing the fields described above.
         A task is considered effectively scheduled based on the function defined below (towards end of Task class),
             which considers a Task effective if >= 50% of its scheduled times were effective.
