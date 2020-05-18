@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from .models import UserRegistrationForm
+from django.apps import apps
 from django.contrib import messages
+from django.views.generic import ListView
 from django.contrib.auth import views, login, authenticate
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
@@ -91,3 +93,10 @@ class PasswordResetDoneView(views.PasswordResetDoneView):
 #         else:
 #             form = SetPasswordForm(request.user)
 #         return render(request, self.template_name, {'form': form, 'title': 'set new password'})
+
+
+
+class TasksView(ListView):
+    Task = apps.get_model('planner', 'Task')
+    model = Task
+    context_object_name = 'tasks'

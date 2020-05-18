@@ -9,7 +9,7 @@ class Task(models.Model):
         #earliest() gets first result, meaning earliest addDate is selected; dueDate = tiebreaker
         get_latest_by = ['addDate', 'dueDate']
 
-        ordering = ['name', 'category', 'user', 'addDate', 'dueDate', 'expTime', ]
+        ordering = ['name', 'notes', 'category', 'user', 'addDate', 'dueDate', 'expTime', ]
 
 
     # NOTE: Django auto adds an auto-incrementing 'id' field --> create a field and set primary_key=True
@@ -18,7 +18,8 @@ class Task(models.Model):
 
     name = models.CharField("Task Name", max_length=50, db_index=True)
         # optional first positional arg = human readable name
-    category = models.CharField(max_length=50, choices = [
+    notes = models.TextField(help_text="Notes", default="")
+    category = models.CharField(max_length=5, choices = [
         ('Ex', 'Exercise'),
         ('Leis', 'Leisure'),
         ('House', 'Household'),
@@ -55,8 +56,10 @@ class Task(models.Model):
             you can list all the ScheduleInstances associated with a particular Task as well as all Tasks associated
             with a particular ScheduleInstance.
         The times field will map to ScheduleInstance objects containing the fields described above.
-        A task is considered effectively scheduled based on the function defined below (towards end of Task class),
-            which considers a Task effective if >= 50% of its scheduled times were effective.
+        To determine whether a task was effectively scheduled, use the function defined below (towards end of Task class),
+            which returns the proportion of ScheduledInstances of that task that were considered effectively-scheduled.
+              --> NOTE: since we may not receive feedback on particular (or any) instances, this method may not some
+                  instances in the proportion or possibly even return None
               --> An alternative solution to using this method would be to store a boolean at the beginning of the list
                   that represents whether the Task was scheduled effectively (and we could use any number of ways to set
                   this value). To do this the times field would need to map to a class that contains a single boolean
@@ -85,17 +88,20 @@ class Task(models.Model):
     def timeTilDue(self):
         return self.dueDate - timezone.now()
 
-    #returns True if this Task was scheduled effectively
+    #returns None if no feedback was received, otherwise returns proportion of instances that were effectively-scheduled
     def effectiveTask(self):
         count = 0
         num_effective = 0
 
         for instance in self.times.all():
-            count += 1
-            if instance.effective == True:
-                num_effective += 1
+            if instance != None:
+                count += 1
+                if instance.effective == True:
+                    num_effective += 1
 
-        return num_effective / count >= .5
+        if count == 0:
+            return None
+        return num_effective / count
 
 
     #saves a task to the database by first checking its validity and then using Django's save method
@@ -115,6 +121,7 @@ class CustomDateTime:
         self.second = time.second
         self.microsecond = time.microsecond
         self.timezone = time.tzinfo
+        self.orig = time
 
     def changeTimeZone(self, newTimeZone):
         self.timezone = newTimeZone
@@ -122,7 +129,7 @@ class CustomDateTime:
 
     #converts to Eastern time
     def convertToET(self):
-        self.hour -= 4 if time.localtime().tm_isdst == 0 else 5
+        self.hour -= 4 if self.orig.dst() == 0 else 5
         if self.hour <= 0:
             self.hour += 24
             self.day -= 1
@@ -142,13 +149,12 @@ class ScheduleInstance(models.Model):
 
     class Meta:
         ordering = ['startTime', 'duration', 'effective']
-        # unique_together = ['startTime',]
-            # ^ uncomment if we want startTimes to be unique
+        unique_together = ['startTime',]
 
     startTime = models.DateTimeField("Start time of this scheduled instance")
     duration = models.DurationField("Duration of this scheduled instance")
-    effective = models.BooleanField("Whether this instance was scheduled effectively")
-        # ^ give a default value of False???
+    effective = models.BooleanField("Whether this instance was scheduled effectively", default=None)
+        # ^ give a default of True if None gives errors
 
     def __str__(self):
         return f'Scheduled Instance at {CustomDateTime(self.startTime).convertToET()} for {self.duration}'

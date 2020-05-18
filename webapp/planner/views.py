@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import base
 from .models import Task
 from django.contrib import messages
 

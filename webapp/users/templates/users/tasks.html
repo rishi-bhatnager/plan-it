@@ -1,0 +1,43 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <h2>Your Tasks</h2>
+    {% for task in tasks %}
+        <button onclick="showDetails()">{{task.name}}</button>
+
+        <script>
+            function showDetails() {
+                alert("Name: " + "{{task.name}}"
+                    + ", User: " + "{{task.user}}"
+                    + "\nNotes: " + "{{task.notes|safe}}"
+                // see Django's built-in template tags and filters for more ways to format properly
+                    + "\nCategory: " + "{{task.get_category_display}}"
+                    + "\nDate Added: " + "{{task.getAddDate}}"
+                    + "\nDate Due: " + "{{task.getDueDate}}"
+                    + "\nExpected Time for Completion: " + "{{task.expTime}}");
+            }
+        </script>
+    {% empty %}
+        <p>You don't have any tasks</p>
+    {% endfor %}
+{% else %}
+    <script>
+        function redirect(){
+           window.location.href = '{% url 'users:login' %}';
+        }
+
+        setTimeout(redirect, 5000); //2000 is equivalent to 2 seconds
+    </script>
+
+    <h2>You must be logged in to view this page</h2>
+    <p>
+        If you are not redirected soon, please click <a class="ml-2" href="{% url 'users:login' %}">here</a>
+        to go to the login page.
+    </p>
+{% endif %}
+
+
+{% endblock %}
