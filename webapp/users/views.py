@@ -93,10 +93,3 @@ class PasswordResetDoneView(views.PasswordResetDoneView):
 #         else:
 #             form = SetPasswordForm(request.user)
 #         return render(request, self.template_name, {'form': form, 'title': 'set new password'})
-
-
-
-class TasksView(ListView):
-    Task = apps.get_model('planner', 'Task')
-    model = Task
-    context_object_name = 'tasks'

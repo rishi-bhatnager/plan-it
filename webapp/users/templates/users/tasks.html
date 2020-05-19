@@ -5,24 +5,21 @@
 
 {% if user.is_authenticated %}
     <h2>Your Tasks</h2>
-    {% for task in tasks %}
-        <button onclick="showDetails()">{{task.name}}</button>
-
-        <script>
-            function showDetails() {
-                alert("Name: " + "{{task.name}}"
-                    + ", User: " + "{{task.user}}"
-                    + "\nNotes: " + "{{task.notes|safe}}"
-                // see Django's built-in template tags and filters for more ways to format properly
-                    + "\nCategory: " + "{{task.get_category_display}}"
-                    + "\nDate Added: " + "{{task.getAddDate}}"
-                    + "\nDate Due: " + "{{task.getDueDate}}"
-                    + "\nExpected Time for Completion: " + "{{task.expTime}}");
-            }
-        </script>
+    <ul>
+    {% for task in user.task_set.all %}
+        <li><button>{{task.name|safe}}</button></li>
+        <p>Name: {{task.name|safe}}, User: {{task.user}}</p>
+        <p>Notes: {{task.notes|safe}}</p>
+            <!-- see Django's built-in template tags and filters for more ways to format properly -->
+        <p>Category: {{task.get_category_display}}</p>
+        <p>Date Added: {{task.getAddDate}}</p>
+        <p>Date Due: {{task.getDueDate}}</p>
+        <p>Expected Time for Completion: {{task.expTime}}</p>
+        <p>Scheduled Times: {{task.times}}</p>
     {% empty %}
         <p>You don't have any tasks</p>
     {% endfor %}
+    </ul>
 {% else %}
     <script>
         function redirect(){

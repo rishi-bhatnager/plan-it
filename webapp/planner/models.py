@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import timedelta
+import time
 
 class Task(models.Model):
 
@@ -129,7 +130,7 @@ class CustomDateTime:
 
     #converts to Eastern time
     def convertToET(self):
-        self.hour -= 4 if self.orig.dst() == 0 else 5
+        self.hour -= 4 if time.localtime().tm_isdst == 0 else 5
         if self.hour <= 0:
             self.hour += 24
             self.day -= 1
