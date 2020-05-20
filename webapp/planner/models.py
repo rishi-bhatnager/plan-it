@@ -10,7 +10,10 @@ class Task(models.Model):
         #earliest() gets first result, meaning earliest addDate is selected; dueDate = tiebreaker
         get_latest_by = ['addDate', 'dueDate']
 
-        ordering = ['name', 'notes', 'category', 'user', 'addDate', 'dueDate', 'expTime', ]
+        #priority order of fields to use when ordering Task objects
+        #this order prioritizes (in this order): earliest addDate, earliest dueDate, greatest expTime,
+            #and name is ascending order
+        ordering = ['addDate', 'dueDate', '-expTime', 'name', ]
 
 
     # NOTE: Django auto adds an auto-incrementing 'id' field --> create a field and set primary_key=True
@@ -38,8 +41,10 @@ class Task(models.Model):
         #   - Since there is a default of None, be sure to check that users aren't None before dealing with them
 
     addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
-    dueDate = models.DateTimeField("Due Date", help_text="Enter by when must this task be completed")
-    expTime = models.DurationField("Expected Time for Completion", help_text="Enter the amount of time you expect to complete this task")
+    dueDate = models.DateTimeField("Due Date",
+        help_text="Enter by when must this task be completed in the following format: YYYY-MM-DD HH:MM:SS")
+    expTime = models.DurationField("Expected Time for Completion",
+        help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM:SS")
 
 
 
@@ -162,3 +167,12 @@ class ScheduleInstance(models.Model):
 
     def __repr__(self):
         return str(self)
+
+
+
+# class AddTaskForm(UserCreationForm):
+#     email = forms.EmailField()
+
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'password1', 'password2']

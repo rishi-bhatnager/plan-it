@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, reverse
 from .models import UserRegistrationForm
 from django.apps import apps
 from django.contrib import messages
-from django.views.generic import ListView
-from django.contrib.auth import views, login, authenticate
+from django.views.generic import ListView, DetailView
+from django.apps import apps
+from django.contrib.auth import views, login, logout, authenticate
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
 
@@ -93,3 +95,18 @@ class PasswordResetDoneView(views.PasswordResetDoneView):
 #         else:
 #             form = SetPasswordForm(request.user)
 #         return render(request, self.template_name, {'form': form, 'title': 'set new password'})
+
+
+
+class TasksView(LoginRequiredMixin, ListView):
+    template_name = 'users/tasks.html'
+    context_object_name = 'tasks'
+    model = apps.get_model('planner', 'Task')
+
+class TaskDetailsView(LoginRequiredMixin, DetailView):
+    template_name = 'users/task_details.html'
+    model = apps.get_model('planner', 'Task')
+
+def logout_login(request):
+    logout(request)
+    return redirect(reverse('users:login'))

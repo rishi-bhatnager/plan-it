@@ -3,38 +3,23 @@
 {% block content %}
 
 
-{% if user.is_authenticated %}
-    <h2>Your Tasks</h2>
-    <ul>
-    {% for task in user.task_set.all %}
-        <li><button>{{task.name|safe}}</button></li>
-        <p>Name: {{task.name|safe}}, User: {{task.user}}</p>
-        <p>Notes: {{task.notes|safe}}</p>
-            <!-- see Django's built-in template tags and filters for more ways to format properly -->
-        <p>Category: {{task.get_category_display}}</p>
-        <p>Date Added: {{task.getAddDate}}</p>
-        <p>Date Due: {{task.getDueDate}}</p>
-        <p>Expected Time for Completion: {{task.expTime}}</p>
-        <p>Scheduled Times: {{task.times}}</p>
-    {% empty %}
-        <p>You don't have any tasks</p>
-    {% endfor %}
-    </ul>
-{% else %}
-    <script>
-        function redirect(){
-           window.location.href = '{% url 'users:login' %}';
-        }
-
-        setTimeout(redirect, 5000); //2000 is equivalent to 2 seconds
-    </script>
-
-    <h2>You must be logged in to view this page</h2>
-    <p>
-        If you are not redirected soon, please click <a class="ml-2" href="{% url 'users:login' %}">here</a>
-        to go to the login page.
-    </p>
-{% endif %}
+<h2>your tasks</h2>
+<ul>
+{% for task in user.task_set.all %}
+    <li><button><a href="{% url 'users:task_details' task.id %}">{{task.name|safe}}</a></button></li>
+    <p>Name: {{task.name|safe}}, User: {{task.user}}</p>
+    <!-- <p>Notes: {{task.notes|safe}}</p> -->
+        <!-- see Django's built-in template tags and filters for more ways to format properly -->
+    <p>Category: {{task.get_category_display}}</p>
+    <p>Date Added: {{task.getAddDate}}</p>
+    <!-- <p>Date Due: {{task.getDueDate}}</p> -->
+    <p>Expected Time for Completion: {{task.expTime}}</p>
+    <!-- <p>Scheduled Times: {{task.times}}</p> -->
+{% empty %}
+    <p>You don't have any tasks</p>
+{% endfor %}
+</ul>
+<p><a class="ml-2" href="{% url 'planner:add_task' %}">+ Add Task</a></p>
 
 
 {% endblock %}

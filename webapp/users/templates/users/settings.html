@@ -3,6 +3,9 @@
 {% block content %}
 
 <h2>{{user.username}}</h2>
+<i>
+    Not {{user.username}}? <a class="ml-2" href="{% url 'users:logout_login' %}">Switch accounts</a>
+</i>
 <div class="border-top pt-3">
     <ul>
         <li>

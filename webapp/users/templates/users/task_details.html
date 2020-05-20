@@ -1,0 +1,30 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+
+{% if user.is_authenticated and user == task.user %}
+    <p>
+        <a href=" {% url 'users:tasks' %} ">&lt;&lt;back to your tasks</a>
+    </p>
+    <h2>{{ task.name }}</h2>
+    <ul>
+        <li>Name: {{task.name|safe}}</li>
+        <li>User: {{task.user}}</li>
+        <li>Notes: {{task.notes|safe}}</li>
+        <li>Category: {{task.get_category_display}}</li>
+        <li>Date Added: {{task.getAddDate}}</li>
+        <li>Date Due: {{task.getDueDate}}</li>
+        <li>Expected Time for Completion: {{task.expTime}}</li>
+        <li>Scheduled Times: {{task.times}}</li>
+    </ul>
+{% else %}
+    <h2>You are not authorized to view this page</h2>
+    <p>
+        Please click <a class="ml-2" href="{% url 'users:logout_login' %}">here</a>
+        if you would like to be logged out and redirected to the login page.
+    </p>
+{% endif %}
+
+
+{% endblock %}

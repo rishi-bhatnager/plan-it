@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from .models import Task
+from django.views.generic import CreateView
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     if str(request.META.get('HTTP_REFERER')).endswith('users/change-password') \
@@ -19,3 +21,16 @@ def sendToIndex(request):
 def unavailableFeature(request):
     return render(request, 'planner/unavailableFeature.html',
         {'title': 'Feature under Construction', 'redirect': request.META.get('HTTP_REFERER')})
+
+
+class AddTaskView(LoginRequiredMixin, CreateView):
+    template_name = 'planner/add_task.html'
+    model = Task
+    fields = ['name', 'notes', 'category', 'dueDate', 'expTime']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('users:tasks')

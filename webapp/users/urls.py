@@ -1,6 +1,5 @@
 from django.urls import path, include, reverse_lazy
-from django.views.generic import TemplateView, ListView
-from django.apps import apps
+from django.views.generic import TemplateView
 from . import views
 from django.contrib.auth.views import PasswordResetConfirmView
 
@@ -26,7 +25,7 @@ urlpatterns = [
     # path('social/', include('allauth.urls')),                                                                         uncomment
 
 
-    # path('tasks/', views.TasksView.as_view(template_name='users/tasks.html'), name='tasks'),
-    path('tasks/', ListView.as_view(template_name='users/tasks.html', context_object_name='tasks',
-        model=apps.get_model('planner', 'Task')), name='tasks'),
+    path('tasks/', views.TasksView.as_view(), name='tasks'),
+    path('task/<int:pk>/', views.TaskDetailsView.as_view(), name='task_details'),
+    path('logout-login/', views.logout_login, name='logout_login'),
 ]

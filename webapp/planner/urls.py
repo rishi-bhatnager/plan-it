@@ -7,4 +7,5 @@ urlpatterns = [
     path('index.html/', views.sendToIndex, name='indexRedirect'),
     path('', views.index, name='index'),
     path('feature-unavailable/', views.unavailableFeature, name='feature-unavailable'),
+    path('add-task/', views.AddTaskView.as_view(), name='add_task'),
 ]
