@@ -23,6 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
 
+
+#check where the app is running:
+import socket
+HOST = socket.gethostname()
+print("HOST: ", HOST)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True                                                                                                #change later
 
