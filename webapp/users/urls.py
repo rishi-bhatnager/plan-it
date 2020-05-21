@@ -26,6 +26,6 @@ urlpatterns = [
 
 
     path('tasks/', views.TasksView.as_view(), name='tasks'),
-    path('task/<int:pk>/', views.TaskDetailsView.as_view(), name='task_details'),
+    path('tasks/<int:pk>/', views.TaskDetailsView.as_view(), name='task_details'),
     path('logout-login/', views.logout_login, name='logout_login'),
 ]

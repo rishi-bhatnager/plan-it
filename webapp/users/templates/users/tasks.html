@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<h2>your tasks</h2>
+<h2>my tasks</h2>
 <ul>
 {% for task in user.task_set.all %}
     <li><button><a href="{% url 'users:task_details' task.id %}">{{task.name|safe}}</a></button></li>

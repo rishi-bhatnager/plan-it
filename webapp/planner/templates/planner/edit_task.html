@@ -3,18 +3,17 @@
 {% block content %}
 
 
-<h2>add task</h2>
+<h2>{{ task.name }}</h2>
 <form method="POST">
     {% csrf_token %}
     <fieldset class="form-group">
-        <legend class="border-bottom mb-4">new task</legend>
+        <legend class="border-bottom mb-4">edit task</legend>
         {{ form.as_p }}
     </fieldset>
     <div class="form-group">
         <button type="submit" class="signin">Enter</button>
     </div>
 </form>
-<p><a href=" {% url 'users:tasks' %} ">my tasks</a></p>
 
 
 {% endblock %}

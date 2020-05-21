@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from .models import Task
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -23,6 +23,7 @@ def unavailableFeature(request):
         {'title': 'Feature under Construction', 'redirect': request.META.get('HTTP_REFERER')})
 
 
+
 class AddTaskView(LoginRequiredMixin, CreateView):
     template_name = 'planner/add_task.html'
     model = Task
@@ -33,4 +34,17 @@ class AddTaskView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('users:tasks')
+        return reverse('planner:add_task')
+
+
+class EditTaskView(LoginRequiredMixin, UpdateView):
+    template_name = 'planner/edit_task.html'
+    model = Task
+    fields = ['name', 'notes', 'category', 'dueDate', 'expTime']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('users:task_details', kwargs={'pk': self.get_object().pk})

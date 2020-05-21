@@ -4,14 +4,16 @@
 
 
 {% if user.is_authenticated and user == task.user %}
-    <p>
-        <a href=" {% url 'users:tasks' %} ">&lt;&lt;back to your tasks</a>
-    </p>
+    <p><a href=" {% url 'users:tasks' %} ">&lt;&lt;back to your tasks</a></p>
     <h2>{{ task.name }}</h2>
+    <p><a href=" {% url 'planner:edit_task' task.id %} ">edit</a></p>
     <ul>
         <li>Name: {{task.name|safe}}</li>
         <li>User: {{task.user}}</li>
-        <li>Notes: {{task.notes|safe}}</li>
+        <li>Notes:
+            <ul><li>{{task.notes|safe|linebreaks}}</li></ul>
+            <!-- FIX LATER: created list to indent and give line space before and after, but there's probably a better way -->
+        </li>
         <li>Category: {{task.get_category_display}}</li>
         <li>Date Added: {{task.getAddDate}}</li>
         <li>Date Due: {{task.getDueDate}}</li>
