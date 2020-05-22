@@ -123,6 +123,9 @@ elif not local:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+            'sql_mode': 'traditional',
+            },
             'HOST': 'rishibhat.mysql.pythonanywhere-services.com',
             'PORT': '3306',
             'NAME': 'rishibhat$default',
