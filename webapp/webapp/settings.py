@@ -124,7 +124,8 @@ elif not local:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'OPTIONS': {
-            'sql_mode': 'traditional',
+                'sql_mode': 'traditional',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             },
             'HOST': 'rishibhat.mysql.pythonanywhere-services.com',
             'PORT': '3306',
