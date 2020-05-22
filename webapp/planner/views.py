@@ -69,4 +69,3 @@ class EditTaskView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
 
     def get_success_url(self):
         return reverse('users:task_details', kwargs={'pk': self.get_object().pk})
-
