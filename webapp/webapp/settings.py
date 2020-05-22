@@ -118,13 +118,18 @@ if os.getenv('GAE_APPLICATION', None):
         }
     }
 
-# elif not local:
-#     # running remotely but not on GCP
-#     DATABASES = {
-#         'default': {
-#             # fill out
-#         }
-#     }
+elif not local:
+    # running remotely but not on GCP
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': 'rishibhat.mysql.pythonanywhere-services.com',
+            'PORT': '3306',
+            'NAME': 'rishibhat$default',
+            'USER': 'rishibhat',
+            'PASSWORD': 'smithgirlscscscs',
+        }
+    }
 
 else:
     # Running locally so connect to either a local MySQL instance or connect to
