@@ -141,6 +141,9 @@ else:
     DATABASES = {
         'default': {                                                                                #see above if statement for necessary replacements
             'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+                'sql_mode': 'traditional',
+            },
             'HOST': 'localhost',
             'PORT': '3306',
             'NAME': 'planner',
