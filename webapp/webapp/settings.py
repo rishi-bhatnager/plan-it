@@ -23,10 +23,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True                                                                                                #change later
 
-ALLOWED_HOSTS = ['*']                                                                                 #not safe to use wildcard if deploying outside of GCP
+#checks if app is running locally:
+import socket
+HOST = socket.gethostname()
+local = ".local" in HOST
+# print(local)
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = local                                                                                                #change later
+
+
+ALLOWED_HOSTS = ['.pythonanywhere.com']
+# Uncomment below after return to GCP
+# ALLOWED_HOSTS = ['*']                                                       #not safe to use wildcard if deploying outside of GCP
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
@@ -104,9 +114,18 @@ if os.getenv('GAE_APPLICATION', None):
             'HOST': '/cloudsql/planner-app-265519:us-east1:planner',                    #replace last block (after /) with ~connection name~ of SQL server
             'USER': 'planner-user',                                                                  #replace with SQL DB user
             'PASSWORD': 'smith-gang-v3',                                                            #replace with SQL DB user password
-            'NAME': 'planner',                                                                       #replace with database sql instance?
+            'NAME': 'planner',                                                                       #replace with database name
         }
     }
+
+# elif not local:
+#     # running remotely but not on GCP
+#     DATABASES = {
+#         'default': {
+#             # fill out
+#         }
+#     }
+
 else:
     # Running locally so connect to either a local MySQL instance or connect to
     # Cloud SQL via the proxy. To start the proxy via command line:
