@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, reverse
 from .models import UserRegistrationForm
 from django.apps import apps
 from django.contrib import messages
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
 from django.apps import apps
 from django.contrib.auth import views, login, logout, authenticate
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
 
@@ -103,9 +103,25 @@ class TasksView(LoginRequiredMixin, ListView):
     context_object_name = 'tasks'
     model = apps.get_model('planner', 'Task')
 
-class TaskDetailsView(LoginRequiredMixin, DetailView):
+
+class TaskDetailsView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     template_name = 'users/task_details.html'
     model = apps.get_model('planner', 'Task')
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
+
+
+class TaskRemoveView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'users/task_remove.html'
+    model = apps.get_model('planner', 'Task')
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
+
+    def get_success_url(self):
+        return reverse('users:tasks')
+
 
 def logout_login(request):
     logout(request)
