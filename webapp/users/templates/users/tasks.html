@@ -16,7 +16,7 @@
     <p>Expected Time for Completion: {{task.expTime}}</p>
     <!-- <p>Scheduled Times: {{task.times}}</p> -->
 {% empty %}
-    <p>You don't have any tasks</p>
+    <p>you don't have any tasks</p>
 {% endfor %}
 </ul>
 <p><a class="ml-2" href="{% url 'planner:add_task' %}">+ Add Task</a></p>
