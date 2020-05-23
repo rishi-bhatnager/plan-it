@@ -9,6 +9,8 @@ var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
+var addEvent = document.getElementById('add_event');
+var listEvents = document.getElementById('list_events');
 
 /**
  *
@@ -36,6 +38,8 @@ function initClient() {
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
+    listEvents.onclick = listUpcomingEvents;
+    addEvent.onclick = exe;
   }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
   });
@@ -49,20 +53,19 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-
-    // Creates event object with parameters
-    schedule = createEvent('Test','my house', '15:00', '16:00');
-    //inserts given object
-    makeRequest(schedule);
-
-
-    listUpcomingEvents();
+    addEvent.style.display = 'block';
+    listEvents.style.display = 'block';
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
+    aaddEvent.style.display = 'none';
+    listEvents.style.display = 'none';
   }
 }
-
+function exe() {
+  var schedule = createEvent('Test','my house', '15:00', '16:00');
+  makeRequest(schedule);
+}
 /**
  *  Sign in the user upon button click.
  */
@@ -102,19 +105,12 @@ function createEvent(summary,location,startTime,endTime){
   'description': 'A chance to hear more about Google\'s developer products.',
   'start': {
   'dateTime': ('2020-06-06T' + startTime + ':00-07:00'),
-
   },
   'end': {
   'dateTime': ('2020-06-06T' + endTime + ':00-07:00'),
   }
   };
   return sched;
-
-
-
-
-
-
 }
 
 var makeRequest = function(resource) {
