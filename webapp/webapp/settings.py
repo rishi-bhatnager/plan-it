@@ -27,7 +27,7 @@ SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
 #checks if app is running locally:
 import socket
 HOST = socket.gethostname()
-local = ".local" in HOST
+local = ".local" in HOST or "A1JHHVQ" in HOST
 # print(local)
 
 # SECURITY WARNING: don't run with debug turned on in production!
