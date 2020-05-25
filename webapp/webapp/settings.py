@@ -34,9 +34,7 @@ local = ".local" in HOST or "A1JHHVQ" in HOST
 DEBUG = local                                                                                                #change later
 
 
-ALLOWED_HOSTS = ['.pythonanywhere.com']
-# Uncomment below after return to GCP
-# ALLOWED_HOSTS = ['*']                                                       #not safe to use wildcard if deploying outside of GCP
+ALLOWED_HOSTS = ['*'] if os.getenv('GAE_APPLICATION', None) else ['.pythonanywhere.com', '127.0.0.1']                                                         #not safe to use wildcard if deploying outside of GCP
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
