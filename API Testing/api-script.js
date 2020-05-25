@@ -39,7 +39,7 @@ function initClient() {
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
     listEvents.onclick = listUpcomingEvents;
-    addEvent.onclick = exe;
+    addEvent.onclick = handleListEventsClick;
   }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
   });
@@ -62,7 +62,7 @@ function updateSigninStatus(isSignedIn) {
     listEvents.style.display = 'none';
   }
 }
-function exe() {
+function handleListEventsClick() {
   var schedule = createEvent('Test','my house', '15:00', '16:00');
   makeRequest(schedule);
 }
@@ -71,6 +71,7 @@ function exe() {
  */
 function handleAuthClick(event) {
   gapi.auth2.getAuthInstance().signIn();
+
 }
 
 /**
