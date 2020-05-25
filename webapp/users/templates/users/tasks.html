@@ -18,8 +18,20 @@
 {% empty %}
     <p>you don't have any tasks</p>
 {% endfor %}
-</ul>
-<p><a class="ml-2" href="{% url 'planner:add_task' %}">+ Add Task</a></p>
 
+<button id="authorize_button" style="display: block;">Authorize</button>
+<button id="signout_button" style="display: none;">Sign Out</button>
+<button id="add_event" style="display:none;">Add Event</button>
+<button id="list_events" style="display:none;">List Events</button>
+<pre id="content" style="white-space: pre-wrap;"></pre>
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+<script src = '../../../static/js/api-script.js' defer></script>
+</ul>
+<p>
+  <a class="ml-2" href="{% url 'planner:add_task' %}">+ Add Task</a>
+</p>
 
 {% endblock %}
