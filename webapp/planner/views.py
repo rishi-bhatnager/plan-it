@@ -15,7 +15,10 @@ def index(request):
     #         messages.success(request, f'Password successfully reset for {request.user.get_username()}')
         # ^ only uncomment if you can get users to stay logged in after resetting their password
             # (then also must redirect to home page instead of the login page as currently constructed)
-    return render(request, 'planner/index.html')
+
+    return redirect(reverse('users:tasks'))
+    #UNCOMMENT BELOW AND DELETE ABOVE ONCE NEW HOME PAGE IMPLEMENTED
+    # return render(request, 'planner/index.html')
 
 def sendToIndex(request):
     return redirect(reverse('planner:index'))
