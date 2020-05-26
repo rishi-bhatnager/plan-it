@@ -209,7 +209,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Django login settings
-from django.urls import reverse_lazy
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'users:login'
 
@@ -217,9 +216,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'rishibhatnager01@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('PLANNER_APP_GMAIL_PASSWORD')
-DEFAULT_FROM_EMAIL = 'rishibhatnager01@gmail.com'
+EMAIL_HOST_USER = 'connect2planit@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('PLANIT_APP_GMAIL_PASSWORD')
+    # ^ environment variable PLANNER_APP_GMAIL_PASSWORD is for rishi's gmail
+DEFAULT_FROM_EMAIL = 'connect2planit@gmail.com'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
