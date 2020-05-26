@@ -1,2 +1,3 @@
 Django==3.0.4 #This requirement must remain pinned at 2.1.14 until https://github.com/PyMySQL/PyMySQL/issues/790 is resolved
 PyMySQL==0.9.3
+python-dotenv
