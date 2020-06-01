@@ -30,7 +30,7 @@ class Task(models.Model):
         ('Pers', 'Personal'),
         ('Work', 'Work'),
         ('', 'None'),
-        ], default='')
+        ], default='', help_text='Not choosing a category may reduce accuracy')
 
     # The user to which this task belongs
     user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
@@ -41,8 +41,20 @@ class Task(models.Model):
         #   - Since there is a default of None, be sure to check that users aren't None before dealing with them
 
     addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
+
     dueDate = models.DateTimeField("Due Date",
-        help_text="Enter by when must this task be completed in the following format: YYYY-MM-DD HH:MM:SS")
+        help_text="Enter by when must this task be completed in 24-hour Eastern Time in the following format: YYYY-MM-DD HH:MM:SS")
+    repeat = models.CharField(max_length=7, choices = [
+        ('Never', 'Never'),
+        ('Daily', 'Daily'),
+        ('Weekly', 'Weekly'),
+        ('Monthly', 'Monthly'),
+        ('Yearly', 'Yearly'),
+        ], default='Never', help_text="How often should this task repeat?")
+    endRepeat = models.DateField("End repeat date", default=dueDate,
+        help_text="Enter the last day on which this task should repeat in the following format: YYYY-MM-DD")
+    # Note: all due dates mapped to by ForeignKey in DueDateAll nested class
+
     expTime = models.DurationField("Expected Time for Completion",
         help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM:SS")
 
@@ -57,7 +69,7 @@ class Task(models.Model):
             2. A DurationField representing for how long this particular instance is scheduled
             3. A BooleanField representing whether this particular instance was scheduled effectively
 
-        Assuming (for now) multiple tasks can be scheduled during the same istance, this represents a many-to-many
+        Assuming (for now) multiple tasks can be scheduled during the same instance, this represents a many-to-many
             relationship (one task maps to many times, and a time can map to multiple tasks). Since this maps both ways,
             you can list all the ScheduleInstances associated with a particular Task as well as all Tasks associated
             with a particular ScheduleInstance.
@@ -117,6 +129,36 @@ class Task(models.Model):
 
 
 
+
+    class ScheduleInstance(models.Model):
+
+        class Meta:
+            ordering = ['startTime', 'duration', 'effective']
+            unique_together = ['startTime',]
+
+        startTime = models.DateTimeField("Start time of this scheduled instance")
+        duration = models.DurationField("Duration of this scheduled instance")
+        effective = models.BooleanField("Whether this instance was scheduled effectively", default=None)
+            # ^ give a default of True if None gives errors
+
+        def __str__(self):
+            return f'Scheduled Instance at {CustomDateTime(self.startTime).convertToET()} for {self.duration}'
+
+        def __repr__(self):
+            return str(self)
+
+
+    class DueDateAll(models.Model):
+
+        class Meta:
+            db_table = 'All Due DateTimes'
+
+        dueDateTime = models.DateTimeField("One of (potentially) many UTC due dates/times",
+            db_column='Due DateTime (Rep,UTC)', verbose_name='Repeated due DateTime in UTC')
+        allDue = models.ForeignKey(Task, on_delete=models.CASCADE, db_column='All Due Dates')
+
+
+
 class CustomDateTime:
     def __init__(self, time):
         self.year = time.year
@@ -133,37 +175,36 @@ class CustomDateTime:
         self.timezone = newTimeZone
         return self
 
-    #converts to Eastern time
+    #returns how far behind ET is from UTC, including DST
+    @staticmethod
+    def getOffset():
+        return 4 if time.localtime().tm_isdst == 0 else 5
+
+    #converts to Eastern time from UTC
+    #NOTE: this changes the object, does NOT return dummy values
     def convertToET(self):
-        self.hour -= 4 if time.localtime().tm_isdst == 0 else 5
-        if self.hour <= 0:
+        self.hour -= getOffset()
+        if self.hour < 0:
             self.hour += 24
             self.day -= 1
 
         self.changeTimeZone("US/Eastern")
         return self
 
-    #toString, excluded microseconds attribute
+    #converts to UTC from ET
+    #NOTE: this changes the object, does NOT return dummy values
+    def convertToUTC(self):
+        self.hour += getOffset()
+        if self.hour >= 24:
+            self.hour -= 24
+            self.day += 1
+
+        self.changeTimeZone("UTC")
+        return self
+
+    #toString, excludes microseconds attribute
     def __str__(self):
         return f'{self.year:04}/{self.month:02}/{self.day:02} {self.hour:02}:{self.minute:02}:{self.second:02} ({self.timezone})'
-
-    def __repr__(self):
-        return str(self)
-
-
-class ScheduleInstance(models.Model):
-
-    class Meta:
-        ordering = ['startTime', 'duration', 'effective']
-        unique_together = ['startTime',]
-
-    startTime = models.DateTimeField("Start time of this scheduled instance")
-    duration = models.DurationField("Duration of this scheduled instance")
-    effective = models.BooleanField("Whether this instance was scheduled effectively", default=None)
-        # ^ give a default of True if None gives errors
-
-    def __str__(self):
-        return f'Scheduled Instance at {CustomDateTime(self.startTime).convertToET()} for {self.duration}'
 
     def __repr__(self):
         return str(self)

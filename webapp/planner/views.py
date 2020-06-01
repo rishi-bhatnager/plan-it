@@ -32,10 +32,40 @@ def unavailableFeature(request):
 class AddTaskView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'planner/add_task.html'
     model = Task
-    fields = ['name', 'notes', 'category', 'dueDate', 'expTime']
+    fields = ['name', 'notes', 'category', 'dueDate', 'repeat', 'endRepeat', 'expTime']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        if form.cleaned_data['repeat'] == 'Never':
+            Convert to UTC:
+            form.instance.dueDateAll_set.add(form.cleaned_data['dueDate'])
+
+
+            #Untested, maybe works, try if above fails
+            # self.get_object().dueDateAll = form.cleaned_data['dueDate']
+
+        else:
+            from dateutil.relativedelta import relativedelta
+            from datetime import datetime
+
+            intervals = {
+                'Daily': relativedelta(days=+1),
+                'Weekly': relativedelta(weeks=+1),
+                'Monthly': relativedelta(months=+1),
+                'Yearly': relativedelta(years=+1),
+            }
+
+            lastDue = form.cleaned_data['dueDate']
+            interval = intervals[form.cleaned_data['repeat']]
+            nextDue = lastDue + interval
+            endRepeat = form.cleaned_data['endRepeat']
+            end = datetime(endRepeat.year, endRepeat.month, endRepeat.day, hour=23,minute=59,second=59,microsecond=999999)
+
+            while nextDue < end:
+#               ADD REPEATED DUE DATES HERE, Remember to CONVERT TO UTC
+
+
 
         #Below doesn't work, but we should probably TRY TO IMPLEMENT AT SOME POINT
         # doesn't allow a task to be added if the user has another, equivalent task
