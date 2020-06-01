@@ -58,7 +58,7 @@ function updateSigninStatus(isSignedIn) {
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
-    aaddEvent.style.display = 'none';
+    addEvent.style.display = 'none';
     listEvents.style.display = 'none';
   }
 }
