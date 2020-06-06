@@ -42,9 +42,9 @@ class Task(models.Model):
 
     addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
     dueDate = models.DateTimeField("Due Date",
-        help_text="Enter by when must this task be completed in the following format: YYYY-MM-DD HH:MM:SS")
+        help_text="Enter by when must this task be completed in the following format: MM/DD/YYYY HH:MM")
     expTime = models.DurationField("Expected Time for Completion",
-        help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM:SS")
+        help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM")
 
 
 
