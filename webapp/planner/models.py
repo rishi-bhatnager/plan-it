@@ -44,7 +44,7 @@ class Task(models.Model):
     dueDate = models.DateTimeField("Due Date",
         help_text="Enter by when must this task be completed in the following format: MM/DD/YYYY HH:MM")
     expTime = models.DurationField("Expected Time for Completion",
-        help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM")
+        help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM:SS")
 
 
 
@@ -145,7 +145,7 @@ class CustomDateTime:
 
     #toString, excluded microseconds attribute
     def __str__(self):
-        return f'{self.year:04}/{self.month:02}/{self.day:02} {self.hour:02}:{self.minute:02}:{self.second:02} ({self.timezone})'
+        return f'{self.month:02}/{self.day:02}/{self.year:04} {self.hour:02}:{self.minute:02}:{self.second:02} ({self.timezone})'
 
     def __repr__(self):
         return str(self)
