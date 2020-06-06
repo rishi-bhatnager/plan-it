@@ -4,10 +4,10 @@
 <h2>my tasks</h2>
 <ul>
 {% for task in user.task_set.all %}
-<li>
-  <button><a href="{% url 'users:task_details' task.id %}">{{task.name|safe}}</a></button>
-  </li>
-  <p>Name: {{task.name|safe}}, User: {{task.user}}</p>
+<div class="card">
+  <button>{{task.name|safe}}</button>
+  <a href="{% url 'users:task_details' task.id %}"> {{task.name|safe}}</a>
+  <p>User: {{task.user}}</p>
   <!-- <p>Notes: {{task.notes|safe}}</p> -->
   <!-- see Django's built-in template tags and filters for more ways to format properly -->
   <p>Category: {{task.get_category_display}}</p>
@@ -15,6 +15,7 @@
   <!-- <p>Date Due: {{task.getDueDate}}</p> -->
   <p>Expected Time for Completion: {{task.expTime}}</p>
   <!-- <p>Scheduled Times: {{task.times}}</p> -->
+</div>
 {% empty %}
   <p>you don't have any tasks</p>
 {% endfor %}
