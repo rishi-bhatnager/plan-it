@@ -3,16 +3,16 @@
 {% block content %}
 
 
-<h2>{{ task.name }}</h2>
+<h2>{{ event.name }}</h2>
 <form method="POST">
     {% csrf_token %}
     <fieldset class="form-group">
-        <legend class="border-bottom mb-4">edit task</legend>
+        <legend class="border-bottom mb-4">edit event</legend>
         {{ form.as_p }}
     </fieldset>
     <div class="form-group">
         <button type="submit" class="signin">Enter</button>
-        <button><a href="{% url 'users:task_details' task.id %}">Cancel</a></button>
+        <button><a href="{% url 'users:event_details' event.id %}">Cancel</a></button>
     </div>
 </form>
 

@@ -9,6 +9,7 @@ from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+import os
 
 
 def register(request):
@@ -47,7 +48,9 @@ class LogoutView(views.LogoutView):
 
 @login_required
 def settings(request):
-    return render(request, 'users/settings.html', {'title': f'{request.user.username} - settings'})
+    return render(request, 'users/settings.html', {'title': f'{request.user.username} - settings',
+            'gcal_api_key': os.environ.get('PLANIT_GCAL_APIKEY')})
+                            # ^ replace with actual key in html this causes issues)
 
 
 class PasswordChangeView(views.PasswordChangeView):
@@ -121,6 +124,40 @@ class TaskRemoveView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('users:tasks')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'task \"{self.get_object().name}\" successfully removed')
+        return super().delete(request, *args, **kwargs)
+
+
+
+class EventsView(LoginRequiredMixin, ListView):
+    template_name = 'users/events.html'
+    context_object_name = 'events'
+    model = apps.get_model('planner', 'Event')
+
+
+class EventDetailsView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    template_name = 'users/event_details.html'
+    model = apps.get_model('planner', 'Event')
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
+
+
+class EventRemoveView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'users/event_remove.html'
+    model = apps.get_model('planner', 'Event')
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
+
+    def get_success_url(self):
+        return reverse('users:events')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'event \"{self.get_object().name}\" successfully removed')
+        return super().delete(request, *args, **kwargs)
 
 
 def logout_login(request):
