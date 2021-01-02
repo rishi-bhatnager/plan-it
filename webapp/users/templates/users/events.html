@@ -14,7 +14,7 @@
   </li>-->
 <div class="card">
   <button><a href="{% url 'users:event_details' event.id %}"></a></button>
-  <p>Name: {{event.name|safe}}</p>
+  <strong><p>Name: {{event.name|safe}}</p></strong>
   <p>User: {{event.user}}</p>
   <!-- <p>Notes: {{event.notes|safe}}</p> -->
   <!-- see Django's built-in template tags and filters for more ways to format properly -->
