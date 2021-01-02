@@ -229,6 +229,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGOUT_REDIRECT_URL = '/users/logout'
     # ^ caused some problems, prob leave commented out
+    
+    
+# Changing input formats for dates and times
+DATETIME_INPUT_FORMATS = ['%m/%d/%Y %H:%M',]
+TIME_INPUT_FORMATS = ['%H:%M',]
 
 
 # Internationalization
