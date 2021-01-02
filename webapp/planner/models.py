@@ -1,10 +1,45 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from datetime import timedelta
+from datetime import timedelta, datetime
 import time
+import pytz
+import warnings
 
-class Task(models.Model):
+class CalendarBlock(models.Model):
+    '''
+    Abstract model representing a block of time on the planner/calendar. Includes Task, Event
+    '''
+
+    name = models.CharField("Name", max_length=50, db_index=True)
+        # optional first positional arg = human readable name
+    notes = models.TextField(default="")
+    addDate = models.DateTimeField("Time When Block was Created", default=timezone.now)
+
+    # The user to which this block belongs
+    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+        # NOTES:
+        #   - Used ForeignKey so that if associated user is deleted then their blocks are also deleted (that's what the
+        #       on_delete parameter does), but may need to switch to ManyToManyField for task/event sharing (so a single block
+        #       can be associated with multiple users if, for example, the creating user invites other users onto the task/event)
+        #   - Since there is a default of None, be sure to check that users aren't None before dealing with them
+
+    class Meta:
+        abstract = True
+
+
+    #returns addDate in Eastern time
+    def getAddDate(self):
+        if self.addDate is None:
+            warnings.warn('some attributes are None')
+            return None
+        return CustomDateTime(self.addDate).convertTZ()
+
+
+class Task(CalendarBlock):
+    '''
+    A task that must be scheduled
+    '''
 
     class Meta:
         #earliest() gets first result, meaning earliest addDate is selected; dueDate = tiebreaker
@@ -20,9 +55,6 @@ class Task(models.Model):
         # to create custom id fields for tasks
     # ALSO: can specify IDs when saving Tasks to database
 
-    name = models.CharField("Task Name", max_length=50, db_index=True)
-        # optional first positional arg = human readable name
-    notes = models.TextField(help_text="Notes", default="")
     category = models.CharField(max_length=5, choices = [
         ('Ex', 'Exercise'),
         ('Leis', 'Leisure'),
@@ -32,17 +64,8 @@ class Task(models.Model):
         ('', 'None'),
         ], default='')
 
-    # The user to which this task belongs
-    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-        # NOTES:
-        #   - Used ForeignKey so that if associated user is deleted then their tasks are also deleted (that's what the
-        #       on_delete parameter does), but may need to switch to ManyToManyField for task sharing (so a single task
-        #       can be associated with multiple users if, for example, the creating user invites other users onto the task)
-        #   - Since there is a default of None, be sure to check that users aren't None before dealing with them
-
-    addDate = models.DateTimeField("Time When Task was Added", default=timezone.now)
     dueDate = models.DateTimeField("Due Date",
-        help_text="Enter by when must this task be completed in the following format: MM/DD/YYYY HH:MM")
+        help_text="Enter by when this task must be completed in the following format: YYYY-MM-DD HH:MM")
     expTime = models.DurationField("Expected Time for Completion",
         help_text="Enter the amount of time you expect to need to complete this task in the following format: HH:MM:SS")
 
@@ -76,22 +99,30 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+        return f'Task {self.name} (Category: {self.category}), due {self.getDueDate()} with expected time {self.expTime}'
+
     #returns expTime in minutes
     def getExpTime(self):
+        if self.expTime is None:
+            warnings.warn('some attributes are None')
+            return None
         return self.expTime.seconds / 60
         # return timedelta(minutes = self.expTime * 10**(-6) / 60)
 
 
     #returns dueDate in Eastern time
     def getDueDate(self):
-        return CustomDateTime(self.dueDate).convertToET()
-
-    #returns addDate in Eastern time
-    def getAddDate(self):
-        return CustomDateTime(self.addDate).convertToET()
+        if self.dueDate is None:
+            warnings.warn('some attributes are None')
+            return None
+        return CustomDateTime(self.dueDate).convertTZ()
 
     #returns time from now til due date
     def timeTilDue(self):
+        if self.dueDate is None:
+            warnings.warn('some attributes are None')
+            return None
         return self.dueDate - timezone.now()
 
     #returns None if no feedback was received, otherwise returns proportion of instances that were effectively-scheduled
@@ -100,9 +131,9 @@ class Task(models.Model):
         num_effective = 0
 
         for instance in self.times.all():
-            if instance != None:
+            if instance is not None:
                 count += 1
-                if instance.effective == True:
+                if instance.effective:
                     num_effective += 1
 
         if count == 0:
@@ -117,31 +148,86 @@ class Task(models.Model):
 
 
 
-class CustomDateTime:
-    def __init__(self, time):
-        self.year = time.year
-        self.month = time.month
-        self.day = time.day
-        self.hour = time.hour
-        self.minute = time.minute
-        self.second = time.second
-        self.microsecond = time.microsecond
-        self.timezone = time.tzinfo
-        self.orig = time
+class CustomDateTime(datetime):
+    def __new__(cls, dt, tz=None):
+        return super().__new__(cls, year=dt.year, month=dt.month, day=dt.day, hour=dt.hour, \
+            minute=dt.minute, second=dt.second, microsecond=dt.microsecond)
+
+    def __init__(self, dt, tz=None):
+        # self.year = dt.year
+        # self.month = dt.month
+        # self.day = dt.day
+        # self.hour = dt.hour
+        # self.minute = dt.minute
+        # self.second = dt.second
+        # self.microsecond = dt.microsecond
+        if tz is None:
+            if dt.tzinfo is not None:
+                self.timezone = str(dt.tzinfo)
+            else:
+                self.timezone = dt.timezone if isinstance(dt, CustomDateTime) else 'US/Eastern'
+        else:
+            self.timezone = str(tz)
+
+        self.altered = False
+        self.orig = dt
+        super().__init__()
+
 
     def changeTimeZone(self, newTimeZone):
-        self.timezone = newTimeZone
+        if newTimeZone is None:
+            warnings.warn('newTimeZone received is none, doing nothing and returning self')
+        else:
+            self.timezone = newTimeZone
+            self.altered = True
         return self
 
-    #converts to Eastern time
-    def convertToET(self):
-        self.hour -= 4 if time.localtime().tm_isdst == 0 else 5
-        if self.hour <= 0:
-            self.hour += 24
-            self.day -= 1
+    #if inplace is True, changes timezone of self and returns self
+    #if inplace is False, returns CustomDateTime object with altered timezone (does not change self)
+    def convertTZ(self, newTimeZone='US/Eastern', inplace=False):
+        if newTimeZone is None:
+            warnings.warn('newTimeZone received is none, doing nothing and returning self')
+            return self
 
-        self.changeTimeZone("US/Eastern")
-        return self
+        if newTimeZone == self.timezone:
+            return self
+
+        try:
+            new = pytz.timezone(newTimeZone)
+        except UnknownTimeZoneError:
+            warnings.warn('invalid timezone passed in, doing nothing and returning existing self')
+            return self
+
+        orig = pytz.timezone(self.timezone)
+        new_dt = self.replace(tzinfo=orig).astimezone(new)
+
+        if inplace:
+            self = CustomDateTime(new.normalize(new_dt), tz=str(new))
+            self.altered = True
+            return self
+        else:
+            temp = CustomDateTime(new.normalize(new_dt), tz=str(new))
+            return temp
+
+
+        # if self.timezone != 'UTC':
+        #     import warnings
+        #     raise warnings.warn('self is not in UTC, doing nothing and returning existing self')
+        # else:
+        #     self.hour -= 4 if time.localtime().tm_isdst == 1 else 5
+        #     if self.hour <= 0:
+        #         self.hour += 24
+        #         self.day -= 1
+
+        #     self.changeTimeZone("US/Eastern")
+        #     self.altered = True
+        # return self
+
+
+    def __add__(self, other):
+        orig_tz = self.timezone
+        result = super().__add__(other)
+        return CustomDateTime(result, tz=orig_tz)
 
     #toString, excluded microseconds attribute
     def __str__(self):
@@ -152,6 +238,9 @@ class CustomDateTime:
 
 
 class ScheduleInstance(models.Model):
+    '''
+    One time for which a Task is scheduled
+    '''
 
     class Meta:
         ordering = ['startTime', 'duration', 'effective']
@@ -163,10 +252,60 @@ class ScheduleInstance(models.Model):
         # ^ give a default of True if None gives errors
 
     def __str__(self):
-        return f'Scheduled Instance at {CustomDateTime(self.startTime).convertToET()} for {self.duration}'
+        return f'Scheduled Instance at {CustomDateTime(self.startTime).convertTZ()} for {self.duration}'
 
     def __repr__(self):
         return str(self)
+
+
+class Event(CalendarBlock):
+    '''
+    An already-existing event that is scheduled at a specific time. Tasks cannot be scheduled during events.
+    '''
+
+    class Meta:
+        ordering = ['startTime', 'duration', ]
+
+    startTime = models.DateTimeField("Start Time",
+        help_text="Enter the time at which this event starts in the following format: YYYY-MM-DD HH:MM")
+    duration = models.DurationField("Duration",
+        help_text="Enter for how long this event will last in the following format: HH:MM:SS")
+
+
+    #returns startTime in Eastern time
+    def getStartTime(self):
+        if self.startTime is None:
+            warnings.warn('some attributes are None')
+            return None
+        return CustomDateTime(self.startTime).convertTZ()
+
+    #calculates and returns the ending time in ET
+    def getEndTime(self):
+        if self.startTime is None or self.duration is None:
+            warnings.warn('some attributes are None')
+            return None
+        # start = self.getStartTime()
+        # return CustomDateTime(dt=(start + self.duration), tz=start.timezone).convertTZ()
+        return CustomDateTime(dt=(self.getStartTime() + self.duration)).convertTZ()
+
+    #calculates and returns the ending time in UTC
+    def getEndTimeUTC(self):
+        if self.startTime is None or self.duration is None:
+            warnings.warn('some attributes are None')
+            return None
+        return self.startTime + self.duration
+
+    def __repr__(self):
+        return f'Event {self.name}, from {self.getStartTime()} to {self.getEndTime()} (duration: {self.duration})'
+
+    def __str__(self):
+        return f'Event {self.name}, from {self.getStartTime()} to {self.getEndTime()}'
+
+    #saves an event to the database by first checking its validity and then using Django's save method
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)   #calls Django's save()
+
 
 
 

@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(b#ey14m2um2gyu#vcv_tu_befsizv*gveu_s6sey8j6@d8v5i'
+SECRET_KEY = os.environ.get('PLANIT_SECRET_KEY')
+            # ^ replace with actual key if this causes issues
 
 
 #checks if app is running locally:
@@ -111,7 +112,8 @@ if os.getenv('GAE_APPLICATION', None):
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '/cloudsql/planner-app-265519:us-east1:planner',                    #replace last block (after /) with ~connection name~ of SQL server
             'USER': 'planner-user',                                                                  #replace with SQL DB user
-            'PASSWORD': 'smith-gang-v3',                                                            #replace with SQL DB user password
+            'PASSWORD': os.environ.get('PLANIT_SQL_PASSWORD'),                                     #replace with SQL DB user password
+                            # ^ revert back to just putting password if this causes issues
             'NAME': 'planner',                                                                       #replace with database name
         }
     }
@@ -128,7 +130,8 @@ elif not local:
             'PORT': '3306',
             'NAME': 'rishibhat$default',
             'USER': 'rishibhat',
-            'PASSWORD': 'smithgirlscscscs',
+            'PASSWORD': os.environ.get('PLANIT_PYTHONANYWHERE_SQL_PASSWORD'),
+                            # ^ revert back to just putting password if this causes issues
         }
     }
 
@@ -149,7 +152,8 @@ else:
             'PORT': '3306',
             'NAME': 'planner',
             'USER': 'planner-local',
-            'PASSWORD': 'smith-gang-v3',
+            'PASSWORD': os.environ.get('PLANIT_SQL_PASSWORD'),
+                            # ^ revert back to just putting password if this causes issues
         }
     }
 # [END db_setup]
@@ -237,7 +241,11 @@ TIME_INPUT_FORMATS = ['%H:%M',]
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+DATETIME_FORMAT = 'M j, Y, g:i a e'
+
+TIME_INPUT_FORMATS = ['%H:%M']
+
+TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
 

@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<p><a href=" {% url 'users:tasks' %} ">&lt;&lt;back to your tasks</a></p>
+<p><a href=" {% url 'users:tasks' %} ">&lt;&lt;back to my tasks</a></p>
 <h2>{{ task.name }}</h2>
 <p><a href=" {% url 'planner:edit_task' task.id %} ">edit</a></p>
 <p><a href=" {% url 'users:task_remove' task.id %} ">remove</a></p>
@@ -18,7 +18,13 @@
     <li>Date Added: {{task.getAddDate}}</li>
     <li>Date Due: {{task.getDueDate}}</li>
     <li>Expected Time for Completion: {{task.expTime}}</li>
-    <li>Scheduled Times: {{task.times}}</li>
+    <li>Scheduled Times:
+        {% if task.times == 'None' %}
+            {{task.times}}
+        {% else %}
+            we haven't scheduled any times for this task yet. hang tight!
+        {% endif %}
+    </li>
 </ul>
 
 

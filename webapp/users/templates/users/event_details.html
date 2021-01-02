@@ -1,0 +1,31 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+
+<p><a href=" {% url 'users:events' %} ">&lt;&lt;back to my events</a></p>
+<h2>{{ event.name }}</h2>
+<p><a href=" {% url 'planner:edit_event' event.id %} ">edit</a></p>
+<p><a href=" {% url 'users:event_remove' event.id %} ">remove</a></p>
+<ul>
+    <li>Name: {{event.name|safe}}</li>
+    <li>User: {{event.user}}</li>
+    <li>Notes:
+        <ul><li>{{event.notes|safe|linebreaks}}</li></ul>
+        <!-- FIX LATER: created list to indent and give line space before and after, but there's probably a better way -->
+    </li>
+    <li>Date Added: {{event.getAddDate}}</li>
+    <li>Start Time: {{event.getStartTime}}</li>
+    <li>End Time: {{event.getEndTime}}</li>
+    <li>Duration: {{event.duration}}</li>
+</ul>
+
+
+    <!-- <h2>You are not authorized to view this page</h2>
+    <p>
+        Please click <a class="ml-2" href="{% url 'users:logout_login' %}">here</a>
+        if you would like to be logged out and redirected to the login page.
+    </p> -->
+
+
+{% endblock %}

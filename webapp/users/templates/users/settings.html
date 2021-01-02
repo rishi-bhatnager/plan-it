@@ -6,15 +6,22 @@
 <i>
     Not {{user.username}}? <a class="ml-2" href="{% url 'users:logout_login' %}">Switch accounts</a>
 </i>
+<br>
 <div class="border-top pt-3">
+  <a href=" {% url 'users:change_password' %} ">change password</a>
+</div>
+<br><br>
+<div class="border-top pt-3">
+  <p><b><u>Calendar Items</u></b></p>
     <ul>
-        <li>
-            <a href=" {% url 'users:change_password' %} ">change password</a>
-        </li>
         <li>
             <a href=" {% url 'users:tasks' %} ">my tasks</a>
         </li>
+        <li>
+            <a href=" {% url 'users:events' %} ">my events</a>
+        </li>
     </ul>
+    <small><i>PS: a task is something you want us to schedule for you, an event is something that has a set time (i.e. we won't schedule anything at that time)</i></small>
 </div>
 
 {% endblock %}

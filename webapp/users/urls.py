@@ -28,5 +28,8 @@ urlpatterns = [
     path('tasks/', views.TasksView.as_view(), name='tasks'),
     path('tasks/<int:pk>/', views.TaskDetailsView.as_view(), name='task_details'),
     path('tasks/<int:pk>/remove/', views.TaskRemoveView.as_view(), name='task_remove'),
+    path('events/', views.EventsView.as_view(), name='events'),
+    path('events/<int:pk>/', views.EventDetailsView.as_view(), name='event_details'),
+    path('events/<int:pk>/remove/', views.EventRemoveView.as_view(), name='event_remove'),
     path('logout-login/', views.logout_login, name='logout_login'),
 ]

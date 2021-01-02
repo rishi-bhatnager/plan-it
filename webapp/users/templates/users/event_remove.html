@@ -1,0 +1,19 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">remove event</legend>
+        <h2>are you sure you would like to delete event "{{ event.name }}"?</h2>
+    </fieldset>
+    <div class="form-group">
+        <button type="submit" class="submit">remove</button>
+        <button type="submit" class="submit"><a href="{% url 'users:event_details' event.id %}">cancel</a></button>
+    </div>
+</form>
+
+
+{% endblock %}

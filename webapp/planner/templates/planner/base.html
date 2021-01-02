@@ -37,7 +37,7 @@
 			<div class="right-nav">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'users:logout' %}">Log Out</a></li>
-                    <li><a href="{% url 'users:settings' %}">Settings</a></li>
+                    <li><a href="{% url 'users:settings' %}">Profile</a></li>
                 {% else %}
                     <li><a href="{% url 'users:login' %}">Log In</a></li>
                     <li><a href="{% url 'users:register' %}">Sign Up</a></li>

@@ -1,0 +1,31 @@
+{% extends 'planner/base.html' %}
+{% block content %}
+
+<h2>my events</h2>
+
+<p><a class="ml-2" href="{% url 'planner:add_event' %}">+ Add Event</a></p>
+<p><a href=" {% url 'users:tasks' %} ">my tasks</a></p>
+
+<br>
+<ul>
+{% for event in user.event_set.all %}
+<li>
+  <button><a href="{% url 'users:event_details' event.id %}">{{event.name|safe}}</a></button>
+  </li>
+  <p>Name: {{event.name|safe}}, User: {{event.user}}</p>
+  <!-- <p>Notes: {{event.notes|safe}}</p> -->
+  <!-- see Django's built-in template tags and filters for more ways to format properly -->
+  <p>Date Added: {{event.getAddDate}}</p>
+  <p>Start Time: {{event.getStartTime}}</p>
+  <p>End Time: {{event.getEndTime}}</p>
+{% empty %}
+  <p>you don't have any events</p>
+{% endfor %}
+
+</ul>
+
+<br>
+<p>
+  <a class="ml-2" href="{% url 'planner:add_event' %}">+ Add Event</a>
+</p>
+{% endblock %}
