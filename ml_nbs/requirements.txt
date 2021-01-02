@@ -1,5 +1,0 @@
-Tensorflow==1.14.0
-ipykernel
-gym
-matplotlib
-stable_baselines
