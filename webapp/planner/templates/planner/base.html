@@ -46,10 +46,20 @@
 		</ul>
 	</div>
 
+
+	<br>
+	<div class="alert-info">
+	  <strong>&ensp; We just added some cool new features! Go to <a href="{% url 'users:settings' %}">your Profile page</a> to check out the new events functionality. &emsp; </strong>
+	  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
+
+
+
+	<br>
 	<div>
 		{% if messages %}
 			{% for message in messages %}
-				<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+				<div class="alert alert-{{ message.tags }}">&nbsp; {{ message }}</div>
 			{% endfor %}
 		{% endif %}
 	</div>

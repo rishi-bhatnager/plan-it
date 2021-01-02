@@ -101,7 +101,7 @@ button {
 button:hover {
     background-color: #159799;
 }
-                                                                                                    /* Rishi edits, remove if screws up */
+                                                                                                    /* Rishi edits, remove if doesn't work */
 .signin {
   background-color: #f7f7f7;
   color: #11b8ba;
@@ -284,4 +284,29 @@ tr:nth-child(even) {
 
 .right-nav li {
   float: right;
+}
+
+
+
+/*alert boxes*/
+.alert-info {
+  padding: 20px;
+  background-color: #54acf4;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
