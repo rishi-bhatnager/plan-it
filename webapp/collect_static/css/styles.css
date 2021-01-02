@@ -101,7 +101,7 @@ button {
 button:hover {
     background-color: #159799;
 }
-                                                                                                    /* Rishi edits, remove if screws up */
+                                                                                                    /* Rishi edits, remove if doesn't work */
 .signin {
   background-color: #f7f7f7;
   color: #11b8ba;
@@ -234,7 +234,38 @@ tr:nth-child(even) {
     margin: 0px;
     text-decoration: none;
 }
+.card button {
+	background-color: #11b8ba;
+	margin-top: 0px;
+	width: 100%;
+	border-radius: 5px;
+	color: ffffff;
+}
 
+.card a {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-decoration: none;
+	z-index: 10;
+	background-color: white;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.card {
+	display: block;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	background-color: #ffffff;
+	transiton: 0.3s;
+	border-radius: 5px;
+	width: 400px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 .active {
     background-color: #ff6557;
 }
@@ -253,4 +284,29 @@ tr:nth-child(even) {
 
 .right-nav li {
   float: right;
+}
+
+
+
+/*alert boxes*/
+.alert-info {
+  padding: 20px;
+  background-color: #54acf4;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
