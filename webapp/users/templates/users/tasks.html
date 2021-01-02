@@ -10,7 +10,8 @@
 <ul>
 {% for task in user.task_set.all %}
 <div class="card">
-  <button><a href="{% url 'users:task_details' task.id %}"> {{task.name|safe}}</a></button>
+  <button><a href="{% url 'users:task_details' task.id %}"></a></button>
+  <p>{{task.name|safe}}</p>
   <p>User: {{task.user}}</p>
   <!-- <p>Notes: {{task.notes|safe}}</p> -->
   <!-- see Django's built-in template tags and filters for more ways to format properly -->
