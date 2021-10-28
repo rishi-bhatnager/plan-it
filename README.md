@@ -1,6 +1,6 @@
 # PlannerApp
 
-*Check out [this project's webiste](https://planit.benwoodman.com)*  
+*Check out [this project's website](https://planit.benwoodman.com)*  
 *Feel free to use the login with username “demo” and password “common123” to test it out, or create your own account*  
 
 <br />
