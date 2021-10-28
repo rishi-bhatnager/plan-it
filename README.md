@@ -1,9 +1,9 @@
 # PlannerApp
 
-*Check out [this project's webiste](https://planit.benwoodman.com)*
-*Feel free to use the login with username “demo” and password “common123” to test it out, or create your own account*
+*Check out [this project's webiste](https://planit.benwoodman.com)*  
+*Feel free to use the login with username “demo” and password “common123” to test it out, or create your own account*  
 
-
+<br />
 One issue many people face is time management. It's easy to lose focus of work you need to get done, especially when there are so many distractions around. Yes, you can plan rigid blocks of time where you will try finish each task, but it's very easy to fall off of these goals. When you miss one task, usually this snowballs into the rest and destroys the plan for the day.
 
 So how can we fix this? Can we make a scheduling app that is more forgiving of missed deadlines and eases you back into your work instead of falling apart?
