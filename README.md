@@ -1,7 +1,7 @@
 # PlannerApp
 
 *Check out [this project's website](https://planit.benwoodman.com)*  
-*Feel free to use the login with username “demo” and password “common123” to test it out, or create your own account*  
+*Feel free to use the username “demo”, password “common123” to test it out, or create an account*  
 
 <br />
 One issue many people face is time management. It's easy to lose focus of work you need to get done, especially when there are so many distractions around. Yes, you can plan rigid blocks of time where you will try finish each task, but it's very easy to fall off of these goals. When you miss one task, usually this snowballs into the rest and destroys the plan for the day.
