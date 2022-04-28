@@ -1,6 +1,6 @@
 # PlannerApp
 
-*Check out [this project's website](https://planit.benwoodman.com)*  
+*Check out [this project's website](https://rishibhat.pythonanywhere.com/)*  
 *Feel free to use the username “demo”, password “common123” to test it out, or create an account*  
 
 <br />
